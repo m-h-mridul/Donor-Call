@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "428155264768",
+    "firebase_url": "https://my-pactice-default-rtdb.firebaseio.com",
+    "project_id": "my-pactice",
+    "storage_bucket": "my-pactice.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:428155264768:android:f6cf824dcbe1611a41dde5",
+        "android_client_info": {
+          "package_name": "com.example.donercall"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "428155264768-6egelt2cq8kvnjd95pservc6n9cl35bo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.donercall",
+            "certificate_hash": "f1b60d6e71c90f868dba238490f074b219bfd981"
+          }
+        },
+        {
+          "client_id": "428155264768-onlua0iqqvq257gvj58ohrqgfmlgh96h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDj0KingIaOkVV4qcoPAdyTzbSvhoXMhIs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "428155264768-cduokbb41r2nigcblmg46f04h9cv82uo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "428155264768-u5ielql5pble7g8vp4jvqt816pfpin05.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.bloodDonationCollage"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
