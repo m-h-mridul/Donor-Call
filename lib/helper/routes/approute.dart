@@ -1,20 +1,17 @@
 import 'package:donercall/screen/registation/Registation.dart';
 import 'package:donercall/helper/splash_screen.dart';
 import 'package:get/get_navigation/get_navigation.dart';
-import '../../garbag/_ambulanceui.dart';
 import '../../screen/home.dart';
-import '../../screen/profile/UserAuthencation.dart';
 import '../../garbag/__ambulancebookingui.dart';
-import '../../garbag/_hosipitalemergecy.dart';
+import '../../screen/helpline/helpline.dart';
 import '../../screen/notification/notfificationUI.dart';
-import '../../garbag/pageviewr.dart';
-import '../../screen/login/resetPassword.dart';
+import '../../screen/pageviwer/pageviewr.dart';
 
 class Approutes {
   static final route = [
     GetPage(
-      name: HospitalEmergncy.name,
-      page: () => const HospitalEmergncy(),
+      name: Helpline.name,
+      page: () => Helpline(),
     ),
     // GetPage(
     //   name: Login.name,
@@ -24,10 +21,7 @@ class Approutes {
       name: Registation.name,
       page: () => Registation(),
     ),
-    GetPage(
-      name: ResetPassword.name,
-      page: () => const ResetPassword(),
-    ),
+    
     GetPage(
       name: Home.name,
       page: () => Home(),

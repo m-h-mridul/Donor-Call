@@ -23,14 +23,14 @@ class CallingName {
   static const String time = 'time';
   static const String loginstatus = 'isLoggedIn';
   static const String notFind = 'not find';
-  static const String bloodbankimage = 'bloodbankimage';
+
 
   static const String bloodbankDB = 'bloodbankDB';
-  static const String bloodbankDBImage = 'bloodbankDBImage';
+  static const String bloodbankImage = 'bloodbankDBImage';
   static const String bloodbankName = 'bloodbankName';
   static const String bloodbankphoneNumber = 'bloodbankphoneNumber';
   static const String bloodbankLocation = 'bloodbankLocation';
-  static const String sendingTime = 'sendingTime';
+  static const String bloodbankAddTime = 'sendingTime';
 
   static const String doctorDb = 'doctorDb';
   static const String doctorName = 'doctorName';
@@ -38,4 +38,11 @@ class CallingName {
   static const String doctorNumber = 'doctorNumber';
   static const String doctorImage = 'doctorImageLink';
   static const String doctorappointment = 'doctorappointment';
+
+  static const String helplineDB = 'helplineDB';
+  static const String helplineImage = 'helplineDBImage';
+  static const String helplineName = 'helplineName';
+  static const String helplinephoneNumber = 'helplinephoneNumber';
+  static const String helplineLocation = 'helplineLocation';
+  static const String helplineAddTime = 'sendingTime';
 }

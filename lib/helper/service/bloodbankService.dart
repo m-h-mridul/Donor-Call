@@ -10,7 +10,7 @@ class Cheaker {
   static const notFind = "Not Find";
 }
 
-class BloodBank_ser {
+class BloodBankService {
   Future<bool> addBloodBank(BloodBankModel bdm) async {
     try {
       await FirebaseFirestore.instance.collection(CallingName.bloodbankDB).add({
@@ -18,7 +18,8 @@ class BloodBank_ser {
         CallingName.bloodbankName: bdm.bloodbankName,
         CallingName.bloodbankLocation: bdm.bloodbankLocation,
         CallingName.bloodbankphoneNumber: bdm.bloodbankphoneNumber,
-        CallingName.sendingTime: Timestamp.now(),
+        CallingName.bloodbankImage: bdm.bloodbankImage,
+        CallingName.bloodbankAddTime: Timestamp.now(),
       }).whenComplete(() {
         showToast(showMessage: 'Add blood bank');
       });
@@ -44,6 +45,9 @@ class BloodBank_ser {
                 map[CallingName.bloodbankLocation] ?? Cheaker.notFind,
             bloodbankphoneNumber:
                 map[CallingName.bloodbankphoneNumber] ?? Cheaker.notFind,
+            bloodbankImage: map[CallingName.bloodbankImage] ?? Cheaker.notFind,
+            adduserid: map[CallingName.user_id]?? Cheaker.notFind,
+            // bloodbankaddTime: map[CallingName.bloodbankAddTime].toString()?? Cheaker.notFind,
           ),
         );
       }

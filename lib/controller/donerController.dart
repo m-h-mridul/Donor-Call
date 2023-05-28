@@ -1,7 +1,6 @@
 import 'package:donercall/controller/mapcontroller.dart';
 import 'package:donercall/helper/callingname.dart';
 import 'package:donercall/helper/toast.dart';
-import 'package:donercall/model/userinformation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

@@ -4,7 +4,7 @@ import 'dart:async';
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/helper/toast.dart';
 import 'package:donercall/screen/home.dart';
-import 'package:donercall/garbag/pageviewr.dart';
+import 'package:donercall/screen/pageviwer/pageviewr.dart';
 import 'package:flutter/material.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';

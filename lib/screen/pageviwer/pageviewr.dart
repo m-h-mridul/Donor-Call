@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
 
-import '../screen/registation/Registation.dart';
+import '../registation/Registation.dart';
 
 class Pagevier extends StatelessWidget {
   Pagevier({Key? key}) : super(key: key);
