@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, file_names, unused_catch_clause
+// ignore_for_file: non_constant_identifier_names, file_names, unused_catch_clause, prefer_interpolation_to_compose_strings
 
 import 'dart:io';
 
@@ -27,7 +27,6 @@ class ProfileEditContoller extends GetxController {
 
   //**sent image into firabse stroage */
   image_sentFirebase(String uid) async {
-    // Uploading the selected image with some custom meta data
     try {
       await storage.ref(uid + 'user_image').putFile(File(imagefilename.value));
     } on FirebaseException catch (error) {

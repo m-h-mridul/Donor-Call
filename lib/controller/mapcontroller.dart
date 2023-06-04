@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 class MapController {
   static final MapController instance = MapController._();
@@ -32,6 +31,8 @@ class MapController {
   RxList<Marker> markersDoner = <Marker>[].obs;
   RxList<Marker> markersAmbulance = <Marker>[].obs;
   RxList<Marker> markersRegistation = <Marker>[].obs;
+  RxList<Marker> markersOwn = <Marker>[].obs;
+   
 
 // created method for getting user current location
   Future<Position> getUserCurrentLocation() async {
@@ -86,6 +87,6 @@ class MapController {
     ByteData customIconBytes = await rootBundle.load(customIconPath);
     var data = customIconBytes.buffer.asUint8List(
         customIconBytes.offsetInBytes, customIconBytes.lengthInBytes);
-    customIcon = BitmapDescriptor.fromBytes(data);
+    customIcon = BitmapDescriptor.fromBytes(data,size: const Size(16,16));
   }
 }

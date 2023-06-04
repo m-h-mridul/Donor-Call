@@ -22,6 +22,11 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Your location is required to provide XYZ feature.</string>
 
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+		<string>sms</string>
+		<string>tel</string>
+		</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>

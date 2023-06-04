@@ -87,7 +87,7 @@ class HelplineAdd extends StatelessWidget {
                             }
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: AppColor.black,
+                            backgroundColor: AppColor.black,
                             padding: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuerypage.safeBlockHorizontal! * 5,
@@ -104,7 +104,7 @@ class HelplineAdd extends StatelessWidget {
                             Get.back();
                           },
                           style: ElevatedButton.styleFrom(
-                            primary: AppColor.bluegray,
+                            backgroundColor: AppColor.bluegray,
                             padding: EdgeInsets.symmetric(
                                 horizontal:
                                     MediaQuerypage.safeBlockHorizontal! * 5,

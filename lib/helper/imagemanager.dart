@@ -1,23 +1,23 @@
-// ignore_for_file: unused_element, unused_local_variable
+// // ignore_for_file: unused_element, unused_local_variable
 
-import 'dart:io';
-import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
-import 'package:get/get_rx/src/rx_types/rx_types.dart';
-import 'package:get/route_manager.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'dart:io';
+// import 'package:firebase_storage/firebase_storage.dart';
+// import 'package:flutter/foundation.dart';
+// import 'package:get/get_rx/src/rx_types/rx_types.dart';
+// import 'package:get/route_manager.dart';
+// import 'package:image_picker/image_picker.dart';
+// import 'package:permission_handler/permission_handler.dart';
 
-import 'callingname.dart';
+// import 'callingname.dart';
 
-class ImageManager {
-  var imagepath = ''.obs;
-  RxString downloadUrl = ''.obs;
-  //
-  openGallery() async {
-    XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-    imagepath.value = image!.path;
-  }
+// class ImageManager {
+//   var imagepath = ''.obs;
+//   RxString downloadUrl = ''.obs;
+//   //
+//   openGallery() async {
+//     XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
+//     imagepath.value = image!.path;
+//   }
 
   // Future<bool> uploadImage() async {
   //   try {
@@ -54,4 +54,4 @@ class ImageManager {
   //     return false;
   //   }
   // }
-}
+// }

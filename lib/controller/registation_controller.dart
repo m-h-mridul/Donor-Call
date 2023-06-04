@@ -1,8 +1,6 @@
 // ignore_for_file: camel_case_types, unused_local_variable, non_constant_identifier_names
 
 import 'dart:async';
-
-import 'package:donercall/controller/mapcontroller.dart';
 import 'package:donercall/helper/service/stroage.dart';
 import 'package:donercall/helper/callingname.dart';
 import 'package:donercall/helper/toast.dart';
@@ -15,7 +13,6 @@ import 'package:get/get.dart';
 
 import '../screen/home.dart';
 import '../screen/registation/userinformationget.dart';
-import 'profileController.dart';
 
 class Registationcontroller extends GetxController {
   String errors = '';
@@ -105,17 +102,14 @@ class Registationcontroller extends GetxController {
       bool? usersCheak = await checkDocumentExists(
           CallingName.user_collectionName, UserInformation.userId);
 
-      ProfileController profileController = ProfileController();
       _timer.cancel();
-      
+
       await Future.delayed(const Duration(seconds: 2));
+      progress!.dismiss();
 
       if (usersCheak) {
-        profileController.getUserInformatio();
-        progress!.dismiss();
         Get.offAllNamed(Home.name);
       } else if (userDataBaseinfo != null) {
-        progress!.dismiss();
         Get.to(() => const UserInfromationGet());
       } else {
         if (kDebugMode) {
@@ -123,6 +117,9 @@ class Registationcontroller extends GetxController {
         }
       }
     } catch (e) {
+      _timer.cancel();
+      progress!.dismiss();
+      Get.back();
       showToast(showMessage: e.toString());
     }
   }

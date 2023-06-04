@@ -2,35 +2,24 @@
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/route_manager.dart';
 import 'package:donercall/helper/splash_screen.dart';
-import 'controller/notificationCon.dart';
 import 'helper/routes/approute.dart';
 
-// const AndroidNotificationChannel channel = AndroidNotificationChannel(
-//     'high_importance_channel', // id
-//     'High Importance Notifications', // title
-//     description:
-//         'This channel is used for important notifications.', // description
-//     importance: Importance.high,
-//     playSound: true);
+Future<void> _firebasemessageBackground(RemoteMessage remoteMessage) async {
+  if (kDebugMode) {
+    print("Handleing thebackground ground message");
+  }
+}
 
-// final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//     FlutterLocalNotificationsPlugin();
-
-// Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-//   await Firebase.initializeApp();
-// }
-
-// bool? ans;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
-  
+  FirebaseMessaging.onBackgroundMessage(_firebasemessageBackground);
 
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
@@ -43,18 +32,6 @@ Future<void> main() async {
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
-  // FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  // await flutterLocalNotificationsPlugin
-  //     .resolvePlatformSpecificImplementation<
-  //         AndroidFlutterLocalNotificationsPlugin>()
-  //     ?.createNotificationChannel(channel);
-
-  // await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-  //   alert: true,
-  //   badge: true,
-  //   sound: true,
-  // );
-
   runApp(const MyApp());
 }
 
@@ -66,15 +43,6 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // final NotificationController _notificationController =
-  //     NotificationController();
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _notificationController.requestPermission();
-  //   _notificationController.initInfo();
-  // }
-
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {

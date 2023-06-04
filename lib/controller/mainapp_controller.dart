@@ -1,5 +1,6 @@
 // ignore_for_file: non_constant_identifier_names, file_names
 
+import 'package:donercall/controller/notificationCon.dart';
 import 'package:donercall/controller/profileController.dart';
 import 'package:donercall/screen/doner/donerView.dart';
 import 'package:donercall/screen/emergency/emergency.dart';
@@ -9,8 +10,9 @@ import '../screen/ambulance/ambulance.dart';
 
 class MainAppController {
   ProfileController profileController = ProfileController();
-
+  NotificationController notificationController = NotificationController();
   List<Widget> view = [const DonerView(), AmbulanceView(), Emeregency()];
+
   //**
   //*bottom naviagation bar
   // */

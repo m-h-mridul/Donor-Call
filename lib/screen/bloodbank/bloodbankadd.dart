@@ -90,7 +90,7 @@ class BloodBankAdd extends StatelessWidget {
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: AppColor.black,
+                              backgroundColor: AppColor.black,
                               padding: EdgeInsets.symmetric(
                                   horizontal:
                                       MediaQuerypage.safeBlockHorizontal! * 5,
@@ -103,20 +103,20 @@ class BloodBankAdd extends StatelessWidget {
                             ),
                           ),
                           ElevatedButton(
-                            child: Text(
-                              'Cancel',
-                              style: TextStyleManger.whitebold18,
-                            ),
                             onPressed: () {
                               Get.back();
                             },
                             style: ElevatedButton.styleFrom(
-                              primary: AppColor.bluegray,
+                              backgroundColor: AppColor.bluegray,
                               padding: EdgeInsets.symmetric(
                                   horizontal:
                                       MediaQuerypage.safeBlockHorizontal! * 5,
                                   vertical:
                                       MediaQuerypage.safeBlockVertical! * 1.1),
+                            ),
+                            child: Text(
+                              'Cancel',
+                              style: TextStyleManger.whitebold18,
                             ),
                           ),
                         ],

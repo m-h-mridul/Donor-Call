@@ -11,7 +11,7 @@
    <application
         android:label="Doner Call"
         android:name="${applicationName}"
-        android:icon="@mipmap/ic_launcher">
+        android:icon="@mipmap/launcher_icon">
             
     <meta-data android:name="com.google.android.geo.API_KEY"
                android:value="AIzaSyCASLeSkU4jqqzpyEkwXUJhos3i_M0kbKQ"/>
@@ -35,7 +35,13 @@
               <meta-data
              android:name="com.google.firebase.messaging.default_notification_channel_id"
              android:value="high_importance_channel" />
-           
+
+           <meta-data
+            android:name="firebase_messaging_auto_init_enabled"
+            android:value="false" />
+        <meta-data
+            android:name="firebase_analytics_collection_enabled"
+            android:value="false" />
            
            
             <meta-data
@@ -45,6 +51,14 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+             <intent-filter>
+                <action android:name="FLUTTER_NOTIFICATION_CLICK"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+             <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+               
             </intent-filter>
         </activity>
         <!-- Don't delete the meta-data below.

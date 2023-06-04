@@ -1,9 +1,7 @@
-// ignore_for_file: library_private_types_in_public_api
+// ignore_for_file: library_private_types_in_public_api, file_names
 
 import 'package:donercall/helper/appcolor.dart';
-import 'package:donercall/helper/toast.dart';
 import 'package:donercall/screen/notification/notfificationUI.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -31,21 +29,16 @@ class _DonerView extends State<DonerView> {
       donerController.mapController
           .getUserCurrentLocation()
           .then((value) async {
-        donerController.mapController.markersDoner.add(Marker(
+        var ownmarker = Marker(
           markerId: const MarkerId("1"),
           position: LatLng(value.latitude, value.longitude),
           infoWindow: const InfoWindow(
             title: 'My Current Location',
           ),
-        ));
-
-        donerController.mapController.markersAmbulance.add(Marker(
-          markerId: const MarkerId("1"),
-          position: LatLng(value.latitude, value.longitude),
-          infoWindow: const InfoWindow(
-            title: 'My Current Location',
-          ),
-        ));
+        );
+        donerController.mapController.markersDoner.add(ownmarker);
+        donerController.mapController.markersOwn.add(ownmarker);
+        donerController.mapController.markersAmbulance.add(ownmarker);
         CameraPosition cameraPosition = CameraPosition(
           target: LatLng(value.latitude, value.longitude),
           zoom: 14,
@@ -94,7 +87,7 @@ class _DonerView extends State<DonerView> {
                     style: TextStyleManger.black18headline),
                 IconButton(
                   onPressed: () {
-                    Get.to(() => NotificationUi());
+                    Get.to(() => const NotificationUi());
                   },
                   icon: Icon(
                     Icons.notifications_outlined,

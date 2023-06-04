@@ -22,10 +22,11 @@ class Home extends StatelessWidget {
         systemNavigationBarColor: Colors.white,
         statusBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.dark 
-        ));
+        systemNavigationBarIconBrightness: Brightness.dark));
 
     dashboardController.profileController.getUserInformatio();
+    dashboardController.notificationController.callRequiremethodforNoti();
+
     return SafeArea(
       child: Scaffold(
         body: Obx(() =>

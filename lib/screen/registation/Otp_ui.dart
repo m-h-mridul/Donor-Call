@@ -4,8 +4,6 @@ import 'package:donercall/controller/registation_controller.dart';
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/helper/toast.dart';
-import 'package:donercall/screen/registation/userinformationget.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get/get.dart';
@@ -23,10 +21,10 @@ class Otpui extends StatefulWidget {
 class _OtpuiState extends State<Otpui> with CodeAutoFill {
   String? otpCode;
   String? appSignature;
-  // Registationcontroller registationController =
-  //     Get.find<Registationcontroller>();
+
   Registationcontroller registationcontroller =
       Get.find<Registationcontroller>();
+  RxBool button = true.obs;
 
   @override
   void codeUpdated() {
@@ -55,10 +53,18 @@ class _OtpuiState extends State<Otpui> with CodeAutoFill {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(
+          'Otp Code ',
+          style: TextStyleManger.whitebold18,
+        ),
+        centerTitle: true,
+        backgroundColor: AppColor.red_appcolor,
+        elevation: 0,
+      ),
       body: ProgressHUD(
-        borderColor: Colors.orange,
-        backgroundColor: Colors.blue.shade300,
+        // borderColor: Colors.orange,
+        // backgroundColor: Colors.blue.shade300,
         child: Builder(builder: (context) {
           return Padding(
             padding: EdgeInsets.symmetric(
@@ -124,25 +130,27 @@ class _OtpuiState extends State<Otpui> with CodeAutoFill {
                       if (code.length == 6) {
                         otpCode = code;
                         registationcontroller.smsCode.value = code;
-                        // registationcontroller.otpSent();
                       }
                     },
                     onCodeChanged: (code) {
                       if (code!.length == 6) {
                         otpCode = code;
                         registationcontroller.smsCode.value = code;
-                        showToast(showMessage: "otp complate ${code}");
+                        // showToast(showMessage: "otp complate ${code}");
                         // registationcontroller.otpSent();
                       }
                     },
                   ),
                 ),
                 InkWell(
-                  onTap: () {
-                    final progress = ProgressHUD.of(context);
-                    progress?.show();
-                    registationcontroller.otpSent(progress);
-                    progress!.dismiss();
+                  onTap: () async{
+                    if (button.value) {
+                      final progress = ProgressHUD.of(context);
+                      progress?.show();
+                      button.value = false;
+                      await registationcontroller.otpSent(progress);
+                      progress!.dismiss();
+                    }
                   },
                   child: Container(
                     alignment: Alignment.center,

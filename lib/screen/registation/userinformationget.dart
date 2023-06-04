@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors, must_be_immutable, non_constant_identifier_names, unused_local_variable, file_names
 
+import 'dart:async';
+
 import 'package:donercall/controller/mapcontroller.dart';
 import 'package:donercall/helper/Textstyle.dart';
-
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/controller/registation_controller.dart';
@@ -34,13 +35,12 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
 // **
 
   MapController mapController = MapController();
-
   final fromkey = GlobalKey<FormState>();
 
   @override
   void initState() {
     if (mapController.markersRegistation.isEmpty) {
-        mapController.getUserCurrentLocation().then((value) async {
+      mapController.getUserCurrentLocation().then((value) async {
         mapController.markersRegistation.add(Marker(
           markerId: const MarkerId("1"),
           position: LatLng(value.latitude, value.longitude),
@@ -68,9 +68,16 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
   }
 
   @override
+  void dispose() {
+    mapController.registationcecontroller = Completer();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
+
         body: ProgressHUD(
           child: Builder(builder: (context) {
             return SingleChildScrollView(
@@ -89,7 +96,7 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                             horizontal:
                                 MediaQuerypage.safeBlockHorizontal! * 2),
                         child: Container(
-                          height: MediaQuerypage.screenHeight! * 0.3,
+                          height: MediaQuerypage.screenHeight! * 0.4,
                           width: MediaQuerypage.screenWidth!,
                           decoration: BoxDecoration(
                             border: Border.all(
@@ -97,21 +104,23 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                               color: AppColor.red_appcolor,
                             ),
                           ),
-                          child: GoogleMap(
-                            initialCameraPosition: mapController.kGoogle,
-                            mapType: MapType.normal,
-                            myLocationEnabled: true,
-                            compassEnabled: false,
-                            mapToolbarEnabled: false,
-                            zoomControlsEnabled: false,
-                            myLocationButtonEnabled: false,
-                            onMapCreated: (GoogleMapController controller) {
-                              if (!mapController
-                                  .ambulancecontroller.isCompleted) {
-                                mapController.ambulancecontroller
-                                    .complete(controller);
-                              }
-                            },
+                          child: Obx(
+                            () => GoogleMap(
+                              initialCameraPosition: mapController.kGoogle,
+                              mapType: MapType.normal,
+                              myLocationEnabled: true,
+                              compassEnabled: false,
+                              mapToolbarEnabled: false,
+                              zoomControlsEnabled: false,
+                              myLocationButtonEnabled: false,
+                              onMapCreated: (GoogleMapController controller) {
+                                if (!mapController
+                                    .registationcecontroller.isCompleted) {
+                                  mapController.registationcecontroller
+                                      .complete(controller);
+                                }
+                              },
+                            ),
                           ),
                         ),
                       ),

@@ -1,9 +1,7 @@
 // ignore_for_file: override_on_non_overriding_member, prefer_const_constructors, must_be_immutable
 
 import 'package:donercall/helper/appcolor.dart';
-
 import 'package:donercall/helper/media_query.dart';
-import 'package:donercall/screen/profile/UserAuthencation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';

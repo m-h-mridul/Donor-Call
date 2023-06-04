@@ -270,13 +270,13 @@ class ProfileEdit extends StatelessWidget {
                   },
                   child: Container(
                     alignment: Alignment.center,
-                    child: Text('Save', style: TextStyleManger.whitebold18),
                     width: MediaQuerypage.screenWidth,
                     height: MediaQuerypage.screenHeight! * 0.055,
                     decoration: BoxDecoration(
                         color: AppColor.red_appcolor,
                         borderRadius:
                             const BorderRadius.all(Radius.circular(20))),
+                    child: Text('Save', style: TextStyleManger.whitebold18),
                   ),
                 ),
               ],

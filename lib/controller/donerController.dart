@@ -1,19 +1,25 @@
-import 'package:donercall/controller/mapcontroller.dart';
+
+// ignore_for_file: file_names
+
+import 'package:donercall/controller/mapcontroller.dart' ;
 import 'package:donercall/helper/callingname.dart';
 import 'package:donercall/helper/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+import '../helper/service/makephonecall.dart';
+
 class DonerController {
   RxString bloodgropeselected = 'AB+'.obs;
   CollectionReference users =
       FirebaseFirestore.instance.collection(CallingName.user_collectionName);
-
   MapController mapController = MapController();
+
 
   donerList() {
     mapController.markersDoner.clear();
+    mapController.markersDoner.addAll(mapController.markersOwn);
     mapController.markersDoner.bindStream(donerListget());
   }
 
@@ -31,6 +37,9 @@ class DonerController {
               markerId: MarkerId(
                 element.get(CallingName.user_id),
               ),
+              onTap: () async {
+                await launchPhoneCall(element.get(CallingName.mobile));
+              },
               icon: mapController.customIcon,
               position: LatLng(loation[0], loation[1]),
               infoWindow: InfoWindow(

@@ -1,15 +1,13 @@
-// ignore_for_file: unused_local_variable, file_names
+// ignore_for_file: unused_local_variable, file_names, deprecated_member_use, non_constant_identifier_names
 
 import 'package:donercall/helper/callingname.dart';
 import 'package:donercall/model/userinformation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:intl/intl.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../model/UserLocation.dart';
 import 'dart:async';
 
@@ -94,15 +92,6 @@ class ProfileController {
     final date = dateFormat.parse(dateStr);
     final newDate = date.add(Duration(days: daysToAdd));
     return dateFormat.format(newDate);
-  }
-
-  ///**user call button which go to moble call */
-  Future<void> _makePhoneCall(String phoneNumber) async {
-    final Uri launchUri = Uri(
-      scheme: 'tel',
-      path: phoneNumber,
-    );
-    await launch(launchUri.toString());
   }
 
   late BitmapDescriptor customIcon;
