@@ -51,6 +51,8 @@ dependencies:
   fluttertoast: ^8.0.9
   #for map
   google_maps_flutter: ^2.2.5
+
+  app_settings: ^4.2.0
  
 
 dev_dependencies:

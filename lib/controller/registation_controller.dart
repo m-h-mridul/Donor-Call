@@ -1,7 +1,7 @@
 // ignore_for_file: camel_case_types, unused_local_variable, non_constant_identifier_names
 
 import 'dart:async';
-import 'package:donercall/helper/service/stroage.dart';
+import 'package:donercall/service/stroage.dart';
 import 'package:donercall/helper/callingname.dart';
 import 'package:donercall/helper/toast.dart';
 import 'package:donercall/model/userinformation.dart';
@@ -32,6 +32,7 @@ class Registationcontroller extends GetxController {
 
   RxInt secondsRemaining = 60.obs; // Total seconds for the countdown timer
   late Timer _timer;
+  
 
   register_User() async {
     startTimer();

@@ -45,14 +45,23 @@ class Profile extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(
+                Icons.arrow_back_ios,
+                // size: 16,
+                color: Colors.black,
+              ),
+              onPressed: () {
+                Get.back();
+              },
+            ),
             title: Text(
               'Profile',
-              style: TextStyleManger.whitebold18,
+              style: TextStyleManger.black18headline,
             ),
             centerTitle: true,
-            // automaticallyImplyLeading: false,
-            backgroundColor: AppColor.red_appcolor,
-            elevation: 0,
+            backgroundColor: Colors.white,
+            elevation: 1,
           ),
           backgroundColor: Colors.white,
           body: Padding(
@@ -97,7 +106,6 @@ class Profile extends StatelessWidget {
                         height: MediaQuerypage.screenHeight! * .1,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
-                            // color: Colors.blue,
                             border: Border.all(
                               width: 1,
                               color: AppColor.red_appcolor,

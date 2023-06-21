@@ -18,11 +18,13 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     //**status bar theam
     // */
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.white,
-        statusBarColor: Colors.white,
-        statusBarIconBrightness: Brightness.dark,
-        systemNavigationBarIconBrightness: Brightness.dark));
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+          systemNavigationBarColor: Colors.white,
+          statusBarColor: Colors.white,
+          statusBarIconBrightness: Brightness.dark,
+          systemNavigationBarIconBrightness: Brightness.dark),
+    );
 
     dashboardController.profileController.getUserInformatio();
     dashboardController.notificationController.callRequiremethodforNoti();
@@ -43,7 +45,6 @@ class Home extends StatelessWidget {
             onTap: (index) {
               dashboardController.onbottomview_change(index);
             },
-            //other params
           ),
         ),
       ),

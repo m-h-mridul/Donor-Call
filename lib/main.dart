@@ -21,14 +21,6 @@ Future<void> main() async {
   await FirebaseMessaging.instance.getInitialMessage();
   FirebaseMessaging.onBackgroundMessage(_firebasemessageBackground);
 
-  SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(
-      systemNavigationBarColor: Color(0xFFFF2156), // navigation bar color
-      statusBarColor: Color(0xFFFF2156),
-      statusBarIconBrightness: Brightness.dark,
-    ),
-  );
-
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
@@ -43,12 +35,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(primarySwatch: Colors.grey),
+      //theme: ThemeData(primarySwatch: Colors.grey),
       home: SplashScreen(),
       getPages: Approutes.route,
     );

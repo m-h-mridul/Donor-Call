@@ -3,7 +3,6 @@
 import 'package:donercall/controller/registation_controller.dart';
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/helper/appcolor.dart';
-import 'package:donercall/helper/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get/get.dart';
@@ -77,7 +76,7 @@ class _OtpuiState extends State<Otpui> with CodeAutoFill {
                 Center(
                   child: Text(
                     'Provided phone number',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyleManger.black18headline,
                   ),
                 ),
                 Center(
@@ -102,9 +101,8 @@ class _OtpuiState extends State<Otpui> with CodeAutoFill {
                           )
                         : TextButton(
                             onPressed: () {
-                              showToast(
-                                  showMessage:
-                                      'Button press but cannot add operation ');
+                              registationcontroller.register_User();
+                              registationcontroller.secondsRemaining.value = 60;
                             },
                             child: Text('Resent otp '),
                           )),
@@ -143,7 +141,7 @@ class _OtpuiState extends State<Otpui> with CodeAutoFill {
                   ),
                 ),
                 InkWell(
-                  onTap: () async{
+                  onTap: () async {
                     if (button.value) {
                       final progress = ProgressHUD.of(context);
                       progress?.show();

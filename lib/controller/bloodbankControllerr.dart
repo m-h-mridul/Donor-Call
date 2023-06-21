@@ -5,7 +5,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import '../helper/callingname.dart';
-import '../helper/service/bloodbankService.dart';
+import '../service/bloodbankService.dart';
 import '../model/bloodbank_model.dart';
 
 class BloodBankContoller extends GetxController {

@@ -2,9 +2,9 @@
 
 import 'package:donercall/helper/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import '../../model/bloodbank_model.dart';
-import '../../model/userinformation.dart';
-import '../callingname.dart';
+import '../model/bloodbank_model.dart';
+import '../model/userinformation.dart';
+import '../helper/callingname.dart';
 
 class Cheaker {
   static const notFind = "Not Find";
