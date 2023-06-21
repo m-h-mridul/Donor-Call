@@ -74,7 +74,7 @@ class Registation extends StatelessWidget {
               userphoneFiled(),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    vertical: MediaQuerypage.safeBlockVertical! * 3),
+                    vertical: MediaQuerypage.safeBlockVertical! * 4),
                 child: InkWell(
                   onTap: () async {
                     if (fromkey.currentState!.validate()) {
@@ -91,7 +91,7 @@ class Registation extends StatelessWidget {
                   child: Container(
                     alignment: Alignment.center,
                     width: MediaQuerypage.screenWidth,
-                    height: MediaQuerypage.screenHeight! * 0.055,
+                    height: MediaQuerypage.screenHeight! * 0.065,
                     decoration: BoxDecoration(
                         color: AppColor.red_appcolor,
                         borderRadius: BorderRadius.all(Radius.circular(20))),

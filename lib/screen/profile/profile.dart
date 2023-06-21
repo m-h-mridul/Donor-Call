@@ -231,7 +231,7 @@ class Profile extends StatelessWidget {
                           ),
                           title: Text('Profile Edit'),
                           onTap: () {
-                            Get.to(() => ProfileEdit());
+                            // Get.to(() => ProfileEdit());
                           },
                         ),
                         SizedBox.square(

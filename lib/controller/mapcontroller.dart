@@ -7,6 +7,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'dart:ui' as ui;
 
 class MapController {
   static final MapController instance = MapController._();
@@ -43,8 +44,6 @@ class MapController {
     if (userMapPermission.value) {
       return await Geolocator.getCurrentPosition();
     } else {
-      toastShowsometimeletter();
-
       Position position = Position(
           accuracy: 223.4,
           altitude: 334.0,
@@ -71,6 +70,12 @@ class MapController {
         if (permission == LocationPermission.always) {
           userMapPermission.value = true;
         }
+        else{
+          toastShowsometimeletter();
+        }
+      }
+      else{
+         toastShowsometimeletter();
       }
     } catch (e) {}
   }
@@ -79,11 +84,23 @@ class MapController {
   final String customIconPath =
       'assets/blood.png'; // Path to your custom icon image
 
+  // Future<void> loadCustomIcon() async {
+  //   ByteData customIconBytes = await rootBundle.load(customIconPath);
+  //   var data = customIconBytes.buffer.asUint8List(
+  //       customIconBytes.offsetInBytes, customIconBytes.lengthInBytes);
+  //   customIcon = BitmapDescriptor.fromBytes(data, size: const Size(64, 64));
+  // }
+
   Future<void> loadCustomIcon() async {
-    ByteData customIconBytes = await rootBundle.load(customIconPath);
-    var data = customIconBytes.buffer.asUint8List(
-        customIconBytes.offsetInBytes, customIconBytes.lengthInBytes);
-    customIcon = BitmapDescriptor.fromBytes(data, size: const Size(16, 16));
+    ByteData data = await rootBundle.load(customIconPath);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
+        targetWidth: 55);
+    ui.FrameInfo fi = await codec.getNextFrame();
+    var markerIcon =
+        (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+            .buffer
+            .asUint8List();
+    customIcon = BitmapDescriptor.fromBytes(markerIcon);
   }
 
   void toastShowsometimeletter() async {

@@ -34,12 +34,9 @@ dependencies:
   intl: ^0.17.0
   flutter_progress_hud: ^2.0.0
   url_launcher: ^6.0.18
-  image_picker: ^0.8.4+5
   
-  path_provider: ^2.0.8
   shared_preferences: ^2.0.12
   date_time_picker: ^2.1.0
-  shimmer: ^3.0.0
   focused_menu: ^1.0.5
   
   #for permission

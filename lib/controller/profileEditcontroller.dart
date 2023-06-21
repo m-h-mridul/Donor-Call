@@ -6,24 +6,12 @@ import 'package:donercall/helper/callingname.dart';
 import 'package:donercall/model/userinformation.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/state_manager.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
 class ProfileEditContoller extends GetxController {
   RxString imagefilename = ''.obs;
   FirebaseStorage storage = FirebaseStorage.instance;
 
-  ///**meyhod get image*/
-  imageGetGellery() async {
-    try {
-      XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if (image != null) {
-        imagefilename.value = image.path;
-      }
-    } catch (e) {
-      // print('Errorr find in photo get api ${e.toString()}');
-    }
-  }
 
   //**sent image into firabse stroage */
   image_sentFirebase(String uid) async {

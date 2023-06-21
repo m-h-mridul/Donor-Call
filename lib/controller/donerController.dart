@@ -17,7 +17,6 @@ class DonerController {
 
   donerList() {
     mapController.markersDoner.clear();
-    mapController.markersDoner.addAll(mapController.markersOwn);
     mapController.markersDoner.bindStream(donerListget());
   }
 
@@ -49,6 +48,7 @@ class DonerController {
         } else {
           showToast(showMessage: 'No doner found for you');
         }
+        values.addAll(mapController.markersOwn);
         return values;
       });
 }
