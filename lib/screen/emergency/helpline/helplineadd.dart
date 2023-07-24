@@ -2,9 +2,9 @@ import 'package:donercall/controller/helplineController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get/get.dart';
-import '../../helper/Textstyle.dart';
-import '../../helper/appcolor.dart';
-import '../../helper/media_query.dart';
+import '../../../helper/Textstyle.dart';
+import '../../../helper/appcolor.dart';
+import '../../../helper/media_query.dart';
 
 // ignore: must_be_immutable
 class HelplineAdd extends StatelessWidget {

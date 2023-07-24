@@ -1,8 +1,7 @@
 # DonerCall <p align=right><a href="https://drive.google.com/file/d/1d7vkoEoFE_i62bKVJXWojWAF-XlGTuN2/view?usp=drive_link" target="_blank">APK DOWNLOAD</a></p>
 
-
 <p align=center>
-    <img src="assets/louncher_icon/icon.png" width="65%" height="65%">
+    <img src="assets/louncher_icon/icon.png" width="40%" height="40%">
 </p>
 
 ## Functionaly
@@ -14,6 +13,7 @@
 5. Users do not require to remember passwords because its login OTP
 
 ## Tools used
+
 1. Provider,
 2. GetX for state management,
 3. For backend and notification using Firebase.
@@ -23,13 +23,12 @@
 
 ## Image Output
 
-<p align=center>
-    <img src="assets/output/p1.png" width="450" height="700">
-    <img src="assets/output/p2.png" width="450" height="700">
-    <img src="assets/output/p3.png" width="450" height="700">
-    <img src="assets/output/p4.png" width="450" height="700">
-    <img src="assets/output/p5.png" width="450" height="700">
-</p>
-   
-
-   
+<table>
+  <tr width="200" height="280">
+    <th> <img src="another_assets/output/p1.png" width="200" height="280"></th>
+    <th><img src="another_assets/output/p2.png" width="200" height="280"></th>
+    <th> <img src="another_assets/output/p3.png" width="200" height="280"></th>
+    <th> <img src="another_assets/output/p4.png" width="200" height="280"></th>
+    <th> <img src="another_assets/output/p5.png" width="200" height="280"></th>  
+  </tr>
+</table>

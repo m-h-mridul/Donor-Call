@@ -6,10 +6,10 @@ import 'package:donercall/helper/toast.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import '../service/makephonecall.dart';
 
 class DonerController {
+
   RxString bloodgropeselected = 'AB+'.obs;
   CollectionReference users =
       FirebaseFirestore.instance.collection(CallingName.user_collectionName);
@@ -38,7 +38,7 @@ class DonerController {
               infoWindow: InfoWindow(
                 title: element.get(CallingName.name),
                 snippet:
-                    " ${element.get(CallingName.bloodgrope) + '  Click to make a phonecall'}",
+                    " ${element.get(CallingName.bloodgrope) + '  Click to make a phonecall  '}",
                 onTap: () async {
                   await launchPhoneCall(element.get(CallingName.mobile));
                 },

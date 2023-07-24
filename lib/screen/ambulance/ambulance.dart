@@ -6,7 +6,7 @@ import 'package:donercall/helper/media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../controller/mapcontroller.dart';
-import '../../helper/utils/internetconnectivity.dart';
+import '../../helper/internetconnectivity.dart';
 
 class AmbulanceView extends StatelessWidget {
   AmbulanceView({Key? key}) : super(key: key);

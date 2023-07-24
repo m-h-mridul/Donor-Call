@@ -37,14 +37,12 @@ class SplashScreen extends StatelessWidget {
         () => memory.ans!
             ? Get.offAllNamed(Home.name)
             : Get.offAllNamed(Pagevier.name));
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: Color(0xFFFF2156),
-        body: SizedBox(
-          height: MediaQuery.of(context).size.height,
-          width: MediaQuery.of(context).size.width,
-          child: Lottie.asset('assets/lotties/animation_kyg309ev.json'),
-        ),
+    return Scaffold(
+      backgroundColor: Color(0xFFFF2156),
+      body: SizedBox(
+        height: MediaQuery.of(context).size.height,
+        width: MediaQuery.of(context).size.width,
+        child: Lottie.asset('assets/lotties/animation_kyg309ev.json'),
       ),
     );
   }

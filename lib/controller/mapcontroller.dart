@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'dart:ui' as ui;
 
 class MapController {
@@ -18,78 +17,44 @@ class MapController {
     return instance;
   }
 
-  Completer<GoogleMapController> donercontroller = Completer();
-  Completer<GoogleMapController> ambulancecontroller = Completer();
-  Completer<GoogleMapController> registationcecontroller = Completer();
-
-  late final GoogleMapController gmcDonerController;
-  late final GoogleMapController gmcambulanceContoller;
-  late final GoogleMapController gmcregistationContoller;
-
-  RxBool userMapPermission = false.obs;
-
   CameraPosition kGoogle = const CameraPosition(
     target: LatLng(23.8103, 90.4125),
     zoom: 14.4746,
   );
+
+  StreamController<Position> positionStreamController =
+      StreamController<Position>();
+  Stream<Position> get positionStream => positionStreamController.stream;
+
+  Completer<GoogleMapController> donercontroller = Completer();
+  Completer<GoogleMapController> ambulancecontroller = Completer();
+  Completer<GoogleMapController> registationcecontroller = Completer();
+
+  GoogleMapController? gmcDonerController;
+  GoogleMapController? gmcambulanceContoller;
+  GoogleMapController? gmcregistationContoller;
+
+  RxBool userMapPermission = false.obs;
 
   RxList<Marker> markersDoner = <Marker>[].obs;
   RxList<Marker> markersAmbulance = <Marker>[].obs;
   RxList<Marker> markersRegistation = <Marker>[].obs;
   RxList<Marker> markersOwn = <Marker>[].obs;
 
-// created method for getting user current location
-  Future<Position> getUserCurrentLocation() async {
-    await locationPermissionCheak();
-    if (userMapPermission.value) {
-      return await Geolocator.getCurrentPosition();
-    } else {
-      Position position = Position(
-          accuracy: 223.4,
-          altitude: 334.0,
-          heading: 232,
-          speed: 23,
-          speedAccuracy: 37483,
-          longitude: 91.1167,
-          latitude: 23.9528,
-          // latitude: 23.8103,
-          // longitude: 90.4125,
-          timestamp: DateTime.now());
-      return position;
-    }
-  }
-
-  // ignore: non_constant_identifier_names
-  locationPermissionCheak() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    try {
-      if (permission == LocationPermission.denied ||
-          permission == PermissionStatus.restricted) {
-        await Geolocator.requestPermission();
-        permission = await Geolocator.checkPermission();
-        if (permission == LocationPermission.always) {
-          userMapPermission.value = true;
-        }
-        else{
-          toastShowsometimeletter();
-        }
-      }
-      else{
-         toastShowsometimeletter();
-      }
-    } catch (e) {}
-  }
+  Position position = Position(
+      accuracy: 223.4,
+      altitude: 334.0,
+      heading: 232,
+      speed: 23,
+      speedAccuracy: 37483,
+      longitude: 91.1167,
+      latitude: 23.9528,
+      // latitude: 23.8103,
+      // longitude: 90.4125,
+      timestamp: DateTime.now());
 
   late BitmapDescriptor customIcon;
-  final String customIconPath =
-      'assets/blood.png'; // Path to your custom icon image
-
-  // Future<void> loadCustomIcon() async {
-  //   ByteData customIconBytes = await rootBundle.load(customIconPath);
-  //   var data = customIconBytes.buffer.asUint8List(
-  //       customIconBytes.offsetInBytes, customIconBytes.lengthInBytes);
-  //   customIcon = BitmapDescriptor.fromBytes(data, size: const Size(64, 64));
-  // }
+  final String customIconPath = 'assets/blood.png';
 
   Future<void> loadCustomIcon() async {
     ByteData data = await rootBundle.load(customIconPath);

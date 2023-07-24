@@ -29,29 +29,27 @@ class Pagevier extends StatelessWidget {
         statusBarIconBrightness: Brightness.dark,
         systemNavigationBarIconBrightness: Brightness.dark // status bar color
         ));
-    return SafeArea(
-      child: Scaffold(
-        body: PageView(
-          controller: controller,
-          scrollDirection: Axis.horizontal,
-          children: wd,
-        ),
-        floatingActionButton: ElevatedButton(
-          onPressed: () {
-            Get.toNamed(Registation.name);
-          },
-          style: ElevatedButton.styleFrom(
-              backgroundColor: AppColor.red_appcolor,
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuerypage.safeBlockHorizontal! * 5,
-                  vertical: MediaQuerypage.safeBlockVertical! * 1.5),
-              textStyle: TextStyle(
-                  fontSize: MediaQuerypage.fontsize! * 20,
-                  fontWeight: FontWeight.bold)),
-          child: Text(
-            'Next',
-            style: TextStyle(color: Colors.white),
-          ),
+    return Scaffold(
+      body: PageView(
+        controller: controller,
+        scrollDirection: Axis.horizontal,
+        children: wd,
+      ),
+      floatingActionButton: ElevatedButton(
+        onPressed: () {
+          Get.toNamed(Registation.name);
+        },
+        style: ElevatedButton.styleFrom(
+            backgroundColor: AppColor.red_appcolor,
+            padding: EdgeInsets.symmetric(
+                horizontal: MediaQuerypage.safeBlockHorizontal! * 5,
+                vertical: MediaQuerypage.safeBlockVertical! * 1.5),
+            textStyle: TextStyle(
+                fontSize: MediaQuerypage.fontsize! * 20,
+                fontWeight: FontWeight.bold)),
+        child: Text(
+          'Next',
+          style: TextStyle(color: Colors.white),
         ),
       ),
     );

@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, unused_element
 
+import 'package:donercall/service/getuserCurrentlocation.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -20,10 +21,8 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
   FirebaseMessaging.onBackgroundMessage(_firebasemessageBackground);
-
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-
   runApp(const MyApp());
 }
 
@@ -36,10 +35,15 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    locationPermissionCheak();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      //theme: ThemeData(primarySwatch: Colors.grey),
       home: SplashScreen(),
       getPages: Approutes.route,
     );

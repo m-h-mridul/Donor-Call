@@ -1,12 +1,13 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/helper/media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get/route_manager.dart';
-import '../../controller/bloodbankControllerr.dart';
-import '../../helper/Textstyle.dart';
-import '../../helper/appcolor.dart';
+import '../../../controller/bloodbankControllerr.dart';
+import '../../../helper/Textstyle.dart';
+
 
 class BloodBankAdd extends StatelessWidget {
   static const name = '/bloodbackadd';

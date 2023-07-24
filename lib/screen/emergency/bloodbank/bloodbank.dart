@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:get/route_manager.dart';
-import '../../helper/media_query.dart';
-import '../../model/bloodbank_model.dart';
+import '../../../helper/media_query.dart';
+import '../../../model/bloodbank_model.dart';
+
 
 class BloodBankView extends StatelessWidget {
   static const name = '/BloodBankView';

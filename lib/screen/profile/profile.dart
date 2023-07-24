@@ -1,8 +1,6 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, non_constant_identifier_names, unused_field, must_be_immutable
 
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/helper/media_query.dart';
-import 'package:donercall/screen/profile/profileEdit.dart';
 import 'package:donercall/controller/profileController.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -17,27 +15,19 @@ class Profile extends StatelessWidget {
   Profile({Key? key}) : super(key: key);
 
   ProfileController profilecontroller = ProfileController();
-  Future<void>? _launched;
   RxBool isSwitched = false.obs;
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setSystemUIOverlayStyle(
-      SystemUiOverlayStyle(
-        statusBarColor: Color(0xFFFF2156),
-        statusBarIconBrightness: Brightness.light,
-      ),
-    );
     //**call method for get information in api  */
     profilecontroller.getUserInformatio();
 
     return WillPopScope(
       onWillPop: () async {
         SystemChrome.setSystemUIOverlayStyle(
-          SystemUiOverlayStyle(
+          const SystemUiOverlayStyle(
             statusBarColor: Colors.white,
             statusBarIconBrightness: Brightness.dark,
-            // Replace with your desired color
           ),
         );
         return true; // Allow the pop operation
@@ -46,7 +36,7 @@ class Profile extends StatelessWidget {
         child: Scaffold(
           appBar: AppBar(
             leading: IconButton(
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back_ios,
                 // size: 16,
                 color: Colors.black,
@@ -113,7 +103,7 @@ class Profile extends StatelessWidget {
                         child: Center(
                           child: Text(
                             !profilecontroller.dataloadsuccesfull.value
-                                ? 'loading'
+                                ? '-'
                                 : UserInformation.blood_grope.toString(),
                             style: TextStyleManger.red22,
                           ),
@@ -121,7 +111,7 @@ class Profile extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Divider(),
+                  const Divider(),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Row(
@@ -135,7 +125,7 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Divider(),
+                 const Divider(),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: MediaQuerypage.safeBlockHorizontal! * 2),
@@ -165,7 +155,7 @@ class Profile extends StatelessWidget {
                         SizedBox.square(
                           dimension: MediaQuerypage.smallSizeHeight! * 1,
                         ),
-                        Divider(),
+                        const Divider(),
                         SizedBox.square(
                           dimension: MediaQuerypage.smallSizeHeight! * 1,
                         ),
@@ -204,23 +194,7 @@ class Profile extends StatelessWidget {
                         SizedBox.square(
                           dimension: MediaQuerypage.smallSizeHeight! * 1,
                         ),
-                        ListTile(
-                          leading: Icon(
-                            Icons.info_outlined,
-                            color: AppColor.red_appcolor,
-                          ),
-                          title: Text('Available for donate'),
-                          trailing: Obx(
-                            () => Switch(
-                              value: isSwitched.value,
-                              onChanged: (value) {
-                                isSwitched.value = value;
-                              },
-                              activeTrackColor: Color(0xFFF32D5C),
-                              activeColor: AppColor.red_appcolor,
-                            ),
-                          ),
-                        ),
+                        
                         SizedBox.square(
                           dimension: MediaQuerypage.smallSizeHeight! * 1,
                         ),
@@ -229,7 +203,7 @@ class Profile extends StatelessWidget {
                             Icons.edit_outlined,
                             color: AppColor.red_appcolor,
                           ),
-                          title: Text('Profile Edit'),
+                          title:const Text('Profile Edit'),
                           onTap: () {
                             // Get.to(() => ProfileEdit());
                           },

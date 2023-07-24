@@ -3,10 +3,10 @@
 import 'package:donercall/controller/notificationCon.dart';
 import 'package:donercall/controller/profileController.dart';
 import 'package:donercall/screen/doner/donerView.dart';
-import 'package:donercall/screen/emergency/emergency.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../screen/ambulance/ambulance.dart';
+import '../screen/emergency/emergency.dart';
 
 class MainAppController {
   ProfileController profileController = ProfileController();

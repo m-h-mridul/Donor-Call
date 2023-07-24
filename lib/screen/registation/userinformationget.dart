@@ -1,12 +1,9 @@
-// ignore_for_file: prefer_const_constructors, must_be_immutable, non_constant_identifier_names, unused_local_variable, file_names
 
 import 'dart:async';
-
 import 'package:donercall/controller/mapcontroller.dart';
 import 'package:donercall/helper/Textstyle.dart';
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/helper/appcolor.dart';
-import 'package:donercall/controller/registation_controller.dart';
 import 'package:donercall/helper/validation.dart';
 import 'package:donercall/model/bloodmodel.dart';
 import 'package:date_time_picker/date_time_picker.dart';
@@ -17,6 +14,8 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import '../../controller/registation_controller.dart';
+import '../../service/getuserCurrentlocation.dart';
 import '../home.dart';
 
 class UserInfromationGet extends StatefulWidget {
@@ -29,7 +28,7 @@ class UserInfromationGet extends StatefulWidget {
 
 class _UserInfromationGetState extends State<UserInfromationGet> {
   //**
-  Registationcontroller registation_controller =
+  Registationcontroller registationController =
       Get.find<Registationcontroller>();
 
 // **
@@ -40,7 +39,8 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
   @override
   void initState() {
     if (mapController.markersRegistation.isEmpty) {
-      mapController.getUserCurrentLocation().then((value) async {
+     
+     getUserCurrentLocation().then((value) async {
         mapController.markersRegistation.add(Marker(
           markerId: const MarkerId("1"),
           position: LatLng(value.latitude, value.longitude),
@@ -53,13 +53,13 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
           target: LatLng(value.latitude, value.longitude),
           zoom: 14,
         );
-        registation_controller.location = [value.latitude, value.longitude];
+        registationController.location = [value.latitude, value.longitude];
 
         mapController.kGoogle = cameraPosition;
 
         mapController.gmcregistationContoller =
             await mapController.registationcecontroller.future;
-        mapController.gmcregistationContoller
+        mapController.gmcregistationContoller!
             .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
       });
     }
@@ -135,19 +135,19 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                             if (fromkey.currentState!.validate()) {
                               progress!.show();
 
-                              registation_controller.userInfo.name =
-                                  registation_controller.username.text
+                              registationController.userInfo.name =
+                                  registationController.username.text
                                       .toString();
-                              registation_controller.userInfo.location =
-                                  registation_controller.location;
-                              registation_controller.userInfo.blood_grope =
-                                  registation_controller
+                              registationController.userInfo.location =
+                                  registationController.location;
+                              registationController.userInfo.blood_grope =
+                                  registationController
                                       .bloodgropeselected.value;
-                              registation_controller.userInfo.date =
-                                  registation_controller.donate_time.text
+                              registationController.userInfo.date =
+                                  registationController.donate_time.text
                                       .toString();
 
-                              await registation_controller.userDataSent();
+                              await registationController.userDataSent();
 
                               if (fromkey.currentState!.validate()) {
                                 progress.dismiss();
@@ -168,7 +168,7 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                             decoration: BoxDecoration(
                                 color: AppColor.red_appcolor,
                                 borderRadius:
-                                    BorderRadius.all(Radius.circular(20))),
+                                    const BorderRadius.all(Radius.circular(20))),
                             child: Text('Save',
                                 style: TextStyleManger.whitebold18),
                           ),
@@ -189,21 +189,21 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
   }
 
   usrinfoCollection() {
-    var Sizebox = SizedBox(
+    var sizebox = SizedBox(
       height: MediaQuerypage.smallSizeHeight! * 2,
     );
     return Column(
       children: [
         userNamefield(),
-        Sizebox,
+        sizebox,
         SizedBox(
           height: MediaQuerypage.screenHeight! * 0.02,
         ),
-        BloodgropeSelcettion(),
+        bloodgropeSelcettion(),
         SizedBox(
           height: MediaQuerypage.screenHeight! * 0.02,
         ),
-        Text('Last Time Donate Date'),
+        const Text('Last Time Donate Date'),
         donationtimePicker(),
         SizedBox(
           height: MediaQuerypage.screenHeight! * 0.02,
@@ -256,12 +256,12 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
         horizontal: MediaQuerypage.safeBlockHorizontal! * 3,
       ),
       child: DateTimePicker(
-        controller: registation_controller.donate_time,
+        controller: registationController.donate_time,
         type: DateTimePickerType.date,
         dateMask: 'd MMM, yyyy',
         firstDate: DateTime(2000),
         lastDate: DateTime(2100),
-        icon: Icon(Icons.event),
+        icon: const Icon(Icons.event),
         dateLabelText: 'Date',
         timeLabelText: "Hour",
         validator: (val) {
@@ -274,7 +274,7 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
     );
   }
 
-  Padding BloodgropeSelcettion() {
+  Padding bloodgropeSelcettion() {
     return Padding(
       padding: EdgeInsets.only(
         top: MediaQuerypage.screenHeight! * 0.02,
@@ -290,7 +290,7 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                         e.ans.value = false;
                       }
                       element.ans.value = true;
-                      registation_controller.bloodgropeselected.value =
+                      registationController.bloodgropeselected.value =
                           element.name;
                     },
                     child: Container(
@@ -324,12 +324,12 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
 
   TextFormField userNamefield() {
     return TextFormField(
-      controller: registation_controller.username,
+      controller: registationController.username,
       keyboardType: TextInputType.text,
       textInputAction: TextInputAction.next,
       textCapitalization: TextCapitalization.words,
       validator: (_) {
-        if (registation_controller.username.text.toString().isEmpty) {
+        if (registationController.username.text.toString().isEmpty) {
           return 'Enter Name';
         }
         return null;

@@ -31,79 +31,82 @@ class Registation extends StatelessWidget {
   Widget build(BuildContext context) {
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.white,
         statusBarColor: Colors.white,
         statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
       ),
     );
-    return SafeArea(
-        child: Scaffold(
-            body: SingleChildScrollView(
-      child: Form(
-        key: fromkey,
-        child: Padding(
-          padding: EdgeInsets.symmetric(
-              horizontal: MediaQuerypage.safeBlockHorizontal! * 4,
-              vertical: MediaQuerypage.safeBlockVertical! * 4),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Image(
-                image: AssetImage('assets/Logo.png'),
+    return Scaffold(
+        body: SafeArea(
+          child: SingleChildScrollView(
+              child: Form(
+            key: fromkey,
+            child: Padding(
+              padding: EdgeInsets.symmetric(
+            horizontal: MediaQuerypage.safeBlockHorizontal! * 4,
+            vertical: MediaQuerypage.safeBlockVertical! * 4),
+              child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Image(
+              image: AssetImage('assets/Logo.png'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuerypage.safeBlockHorizontal! * 10,
+                  vertical: MediaQuerypage.safeBlockHorizontal! * 5),
+              child: const Image(
+                image: AssetImage('assets/home2.png'),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuerypage.safeBlockHorizontal! * 10,
-                    vertical: MediaQuerypage.safeBlockHorizontal! * 5),
-                child: const Image(
-                  image: AssetImage('assets/home2.png'),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuerypage.safeBlockHorizontal! * 10,
+                  vertical: MediaQuerypage.safeBlockHorizontal! * 5),
+              child: Text(
+                'You can donate for ones in need and\n request blood if you need.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: MediaQuerypage.fontsize! * 15,
+                    color: AppColor.grey),
+              ),
+            ),
+            userphoneFiled(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                  vertical: MediaQuerypage.safeBlockVertical! * 4),
+              child: InkWell(
+                onTap: () async {
+                  if (fromkey.currentState!.validate()) {
+                    registation_controller.userInfo.mobile =
+                        phone.text.trim().toString();
+        
+                    registation_controller.register_User();
+                    Get.to(() => Otpui());
+                  } else {
+                    Validation.emailvalidation('');
+                    Validation.passwordvalidation('');
+                  }
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: MediaQuerypage.screenWidth,
+                  height: MediaQuerypage.screenHeight! * 0.065,
+                  decoration: BoxDecoration(
+                      color: AppColor.red_appcolor,
+                      borderRadius: BorderRadius.all(Radius.circular(20))),
+                  child: Text('Next', style: TextStyleManger.whitebold18),
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    horizontal: MediaQuerypage.safeBlockHorizontal! * 10,
-                    vertical: MediaQuerypage.safeBlockHorizontal! * 5),
-                child: Text(
-                  'You can donate for ones in need and\n request blood if you need.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                      fontSize: MediaQuerypage.fontsize! * 15,
-                      color: AppColor.grey),
-                ),
+            ),
+          ],
               ),
-              userphoneFiled(),
-              Padding(
-                padding: EdgeInsets.symmetric(
-                    vertical: MediaQuerypage.safeBlockVertical! * 4),
-                child: InkWell(
-                  onTap: () async {
-                    if (fromkey.currentState!.validate()) {
-                      registation_controller.userInfo.mobile =
-                          phone.text.trim().toString();
-
-                      registation_controller.register_User();
-                      Get.to(() => Otpui());
-                    } else {
-                      Validation.emailvalidation('');
-                      Validation.passwordvalidation('');
-                    }
-                  },
-                  child: Container(
-                    alignment: Alignment.center,
-                    width: MediaQuerypage.screenWidth,
-                    height: MediaQuerypage.screenHeight! * 0.065,
-                    decoration: BoxDecoration(
-                        color: AppColor.red_appcolor,
-                        borderRadius: BorderRadius.all(Radius.circular(20))),
-                    child: Text('Next', style: TextStyleManger.whitebold18),
-                  ),
-                ),
+            ),
               ),
-            ],
-          ),
-        ),
-      ),
-    )));
+            ),
+        ));
   }
 
   TextFormField userphoneFiled() {

@@ -20,32 +20,33 @@ class Home extends StatelessWidget {
     // */
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.dark.copyWith(
-          systemNavigationBarColor: Colors.white,
-          statusBarColor: Colors.white,
-          statusBarIconBrightness: Brightness.dark,
-          systemNavigationBarIconBrightness: Brightness.dark),
+        systemNavigationBarColor: Colors.white,
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
     );
 
     dashboardController.profileController.getUserInformatio();
     dashboardController.notificationController.callRequiremethodforNoti();
 
-    return SafeArea(
-      child: Scaffold(
-        body: Obx(() =>
+    return Scaffold(
+      body: SafeArea(
+        child: Obx(() =>
             dashboardController.view[dashboardController.bottom_view.value]),
-        bottomNavigationBar: Obx(
-          () => AnimatedBottomNavigationBar(
-            activeColor: AppColor.red_appcolor,
-            icons: dashboardController.iconList,
-            activeIndex: dashboardController.bottom_view.value,
-            gapLocation: GapLocation.none,
-            notchSmoothness: NotchSmoothness.verySmoothEdge,
-            leftCornerRadius: MediaQuerypage.pixel! * 1,
-            rightCornerRadius: MediaQuerypage.pixel! * 1,
-            onTap: (index) {
-              dashboardController.onbottomview_change(index);
-            },
-          ),
+      ),
+      bottomNavigationBar: Obx(
+        () => AnimatedBottomNavigationBar(
+          activeColor: AppColor.red_appcolor,
+          icons: dashboardController.iconList,
+          activeIndex: dashboardController.bottom_view.value,
+          gapLocation: GapLocation.none,
+          notchSmoothness: NotchSmoothness.verySmoothEdge,
+          leftCornerRadius: MediaQuerypage.pixel! * 1,
+          rightCornerRadius: MediaQuerypage.pixel! * 1,
+          onTap: (index) {
+            dashboardController.onbottomview_change(index);
+          },
         ),
       ),
     );

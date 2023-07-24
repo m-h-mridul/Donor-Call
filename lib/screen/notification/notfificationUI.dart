@@ -11,13 +11,11 @@ class NotificationUi extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: AppColor.red_appcolor,
-        ),
-        body: Container(),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: AppColor.red_appcolor,
       ),
+      body: Container(),
     );
   }
 }

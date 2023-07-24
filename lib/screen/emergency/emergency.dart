@@ -1,13 +1,14 @@
 import 'package:donercall/controller/helplineController.dart';
-import 'package:donercall/screen/bloodbank/bloodbankadd.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../controller/bloodbankControllerr.dart';
 import '../../helper/Textstyle.dart';
 import '../../helper/media_query.dart';
-import '../bloodbank/bloodbank.dart';
-import '../helpline/helpline.dart';
-import '../helpline/helplineadd.dart';
+import 'bloodbank/bloodbank.dart';
+import 'bloodbank/bloodbankadd.dart';
+import 'helpline/helpline.dart';
+import 'helpline/helplineadd.dart';
+
 
 // ignore: must_be_immutable
 class Emeregency extends StatelessWidget {
@@ -80,7 +81,7 @@ class Emeregency extends StatelessWidget {
       ),
       child: const Center(
         child: Text(
-          'Blood Bank',
+          'Blood Bank +',
           style: TextStyle(
             fontSize: 20,
             color: Colors.white,
@@ -101,7 +102,7 @@ Container helpLine() {
     ),
     child: const Center(
       child: Text(
-        'Help Line',
+        'Help Line +',
         style: TextStyle(
           fontSize: 20,
           color: Colors.white,
