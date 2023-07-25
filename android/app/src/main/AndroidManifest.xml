@@ -30,7 +30,7 @@
         android:label="Doner Call"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
-
+      <!-- insert goolge api key -->
         <meta-data android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyCASLeSkU4jqqzpyEkwXUJhos3i_M0kbKQ" />
 

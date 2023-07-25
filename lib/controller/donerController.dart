@@ -48,7 +48,7 @@ class DonerController {
         } else {
           showToast(showMessage: 'No doner found for you');
         }
-        values.addAll(mapController.markersOwn);
+        values.add(mapController.markersOwn.value);
         return values;
       });
 }

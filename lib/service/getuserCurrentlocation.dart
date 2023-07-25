@@ -1,9 +1,11 @@
+// ignore_for_file: file_names
+
 import 'dart:async';
 
 import 'package:donercall/controller/mapcontroller.dart';
-import 'package:donercall/helper/toast.dart';
-import 'package:geolocator/geolocator.dart';
+import 'package:geolocator/geolocator.dart' show Geolocator, LocationPermission, Position;
 import 'package:permission_handler/permission_handler.dart';
+
 
 MapController _mapController = MapController();
 

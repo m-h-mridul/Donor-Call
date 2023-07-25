@@ -1,11 +1,13 @@
 // ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, must_be_immutable
 
 import 'dart:async';
+import 'package:donercall/controller/mapcontroller.dart';
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/screen/home.dart';
 import 'package:donercall/screen/pageviwer/pageviewr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 
@@ -19,6 +21,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    MapController _mapController = MapController();
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         systemNavigationBarColor: Color(0xFFFF2156), // navigation bar color
@@ -34,9 +37,11 @@ class SplashScreen extends StatelessWidget {
     MediaQuerypage.init(context);
     Timer(
         Duration(seconds: 3),
-        () => memory.ans!
-            ? Get.offAllNamed(Home.name)
-            : Get.offAllNamed(Pagevier.name));
+        () async => _mapController.userMapPermission.value
+            ? await Geolocator.openAppSettings()
+            : memory.ans!
+                ? Get.offAllNamed(Home.name)
+                : Get.offAllNamed(Pagevier.name));
     return Scaffold(
       backgroundColor: Color(0xFFFF2156),
       body: SizedBox(

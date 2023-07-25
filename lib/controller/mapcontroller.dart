@@ -4,15 +4,14 @@ import 'dart:async';
 import 'package:donercall/helper/toast.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:get/get_rx/src/rx_types/rx_types.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'dart:ui' as ui;
 
 class MapController {
   static final MapController instance = MapController._();
-
   MapController._();
-
   factory MapController() {
     return instance;
   }
@@ -39,7 +38,13 @@ class MapController {
   RxList<Marker> markersDoner = <Marker>[].obs;
   RxList<Marker> markersAmbulance = <Marker>[].obs;
   RxList<Marker> markersRegistation = <Marker>[].obs;
-  RxList<Marker> markersOwn = <Marker>[].obs;
+  Rx<Marker> markersOwn = const Marker(
+    markerId: MarkerId("1"),
+    position: LatLng(23.8103, 90.4125),
+    infoWindow: InfoWindow(
+      title: 'My Current Location',
+    ),
+  ).obs;
 
   Position position = Position(
       accuracy: 223.4,
@@ -73,3 +78,4 @@ class MapController {
     showToast(showMessage: "Please give permission to location");
   }
 }
+

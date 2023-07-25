@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api, file_names
+// ignore_for_file: library_private_types_in_public_api, file_names, void_checks
 
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/screen/notification/notfificationUI.dart';
@@ -31,7 +31,6 @@ class _DonerView extends State<DonerView> {
   void initState() {
     super.initState();
     mapController.loadCustomIcon();
-
     if (mapController.markersDoner.isEmpty) {
       getUserCurrentLocation().then((value) async {
         Marker ownmarker = Marker(
@@ -41,18 +40,16 @@ class _DonerView extends State<DonerView> {
             title: 'My Current Location',
           ),
         );
-
-        mapController.markersDoner.add(ownmarker);
-        mapController.markersOwn.add(ownmarker);
-        mapController.markersAmbulance.add(ownmarker);
-
         CameraPosition cameraPosition = CameraPosition(
           target: LatLng(value.latitude, value.longitude),
           zoom: 14,
         );
 
         mapController.kGoogle = cameraPosition;
-// for donnerController
+        mapController.markersOwn.value = ownmarker;
+        mapController.markersDoner.add(ownmarker);
+        mapController.markersAmbulance.add(ownmarker);
+        // for donnerController
         mapController.gmcDonerController =
             await mapController.donercontroller.future;
         mapController.gmcDonerController!
@@ -65,21 +62,37 @@ class _DonerView extends State<DonerView> {
         task.value = true;
       });
     }
+
     Stream<Position> temp = Geolocator.getPositionStream();
-    temp.listen((event) {
-      mapController.kGoogle = CameraPosition(
-        target: LatLng(event.latitude, event.longitude),
-        zoom: 14,
-      );
-      Marker ownmarker = Marker(
-        markerId: const MarkerId("1"),
-        position: LatLng(event.latitude, event.longitude),
-        infoWindow: const InfoWindow(
-          title: 'My Current Location',
-        ),
-      );
-      mapController.markersOwn.add(ownmarker);
-    });
+    temp.listen(
+      (event) {
+        CameraPosition cameraPosition = CameraPosition(
+          target: LatLng(event.latitude, event.longitude),
+          zoom: 14,
+        );
+        Marker ownmarker = Marker(
+          markerId: const MarkerId("1"),
+          position: LatLng(event.latitude, event.longitude),
+          infoWindow: const InfoWindow(
+            title: 'My Current Location',
+          ),
+        );
+        mapController.kGoogle = cameraPosition;
+        mapController.markersOwn.value = ownmarker;
+        mapController.markersDoner.add(ownmarker);
+        mapController.markersAmbulance.add(ownmarker);
+        Future.delayed(const Duration(seconds: 1), () async {
+          mapController.gmcDonerController =
+              await mapController.donercontroller.future;
+          mapController.gmcDonerController!
+              .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+          mapController.gmcambulanceContoller =
+              await mapController.ambulancecontroller.future;
+          mapController.gmcambulanceContoller!
+              .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+        });
+      },
+    );
   }
 
   @override
@@ -120,6 +133,7 @@ class _DonerView extends State<DonerView> {
         Expanded(
           child: Obx(
             (() => GoogleMap(
+                  markers: Set<Marker>.of(mapController.markersDoner),
                   initialCameraPosition: mapController.kGoogle,
                   mapType: MapType.normal,
                   myLocationEnabled: true,
@@ -132,7 +146,6 @@ class _DonerView extends State<DonerView> {
                       mapController.donercontroller.complete(controller);
                     }
                   },
-                  markers: Set<Marker>.of(mapController.markersDoner),
                 )),
           ),
         ),

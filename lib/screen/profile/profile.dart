@@ -1,4 +1,6 @@
 
+// ignore_for_file: must_be_immutable
+
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/controller/profileController.dart';
