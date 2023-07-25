@@ -21,9 +21,6 @@ class MapController {
     zoom: 14.4746,
   );
 
-  StreamController<Position> positionStreamController =
-      StreamController<Position>();
-  Stream<Position> get positionStream => positionStreamController.stream;
 
   Completer<GoogleMapController> donercontroller = Completer();
   Completer<GoogleMapController> ambulancecontroller = Completer();

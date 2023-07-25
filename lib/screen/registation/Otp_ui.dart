@@ -4,6 +4,7 @@ import 'package:donercall/controller/registation_controller.dart';
 import 'package:donercall/helper/media_query.dart';
 import 'package:donercall/helper/appcolor.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_progress_hud/flutter_progress_hud.dart';
 import 'package:get/get.dart';
 import 'package:sms_autofill/sms_autofill.dart';
@@ -50,6 +51,13 @@ class _OtpuiState extends State<Otpui> with CodeAutoFill {
 
   @override
   Widget build(BuildContext context) {
+     SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle(
+        systemNavigationBarColor: Color(0xFFFF2156), // navigation bar color
+        statusBarColor: Color(0xFFFF2156),
+        statusBarIconBrightness: Brightness.dark,
+      ),
+    );
     return Scaffold(
       appBar: AppBar(
     leading: IconButton(

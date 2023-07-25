@@ -1,5 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, file_names, void_checks
 
+import 'dart:async';
+
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/screen/notification/notfificationUI.dart';
 import 'package:flutter/material.dart';
@@ -25,7 +27,6 @@ class DonerView extends StatefulWidget {
 class _DonerView extends State<DonerView> {
   DonerController donerController = DonerController();
   MapController mapController = MapController();
-  Rx<bool> task = false.obs;
 
   @override
   void initState() {
@@ -59,7 +60,6 @@ class _DonerView extends State<DonerView> {
             await mapController.ambulancecontroller.future;
         mapController.gmcambulanceContoller!
             .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-        task.value = true;
       });
     }
 
@@ -81,18 +81,25 @@ class _DonerView extends State<DonerView> {
         mapController.markersOwn.value = ownmarker;
         mapController.markersDoner.add(ownmarker);
         mapController.markersAmbulance.add(ownmarker);
-        Future.delayed(const Duration(seconds: 1), () async {
+        Future.delayed(const Duration(seconds: 2), () async {
           mapController.gmcDonerController =
               await mapController.donercontroller.future;
           mapController.gmcDonerController!
               .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+          // for ambulance update
           mapController.gmcambulanceContoller =
               await mapController.ambulancecontroller.future;
           mapController.gmcambulanceContoller!
               .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+        
         });
       },
     );
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    mapController.donercontroller = Completer();
   }
 
   @override
@@ -132,21 +139,21 @@ class _DonerView extends State<DonerView> {
         ),
         Expanded(
           child: Obx(
-            (() => GoogleMap(
-                  markers: Set<Marker>.of(mapController.markersDoner),
-                  initialCameraPosition: mapController.kGoogle,
-                  mapType: MapType.normal,
-                  myLocationEnabled: true,
-                  compassEnabled: false,
-                  mapToolbarEnabled: false,
-                  zoomControlsEnabled: false,
-                  myLocationButtonEnabled: false,
-                  onMapCreated: (GoogleMapController controller) {
-                    if (!mapController.donercontroller.isCompleted) {
-                      mapController.donercontroller.complete(controller);
-                    }
-                  },
-                )),
+            () => GoogleMap(
+              markers: Set<Marker>.of(mapController.markersDoner),
+              initialCameraPosition: mapController.kGoogle,
+              mapType: MapType.normal,
+              myLocationEnabled: true,
+              compassEnabled: false,
+              mapToolbarEnabled: false,
+              zoomControlsEnabled: false,
+              myLocationButtonEnabled: false,
+              onMapCreated: (GoogleMapController controller) {
+                if (!mapController.donercontroller.isCompleted) {
+                  mapController.donercontroller.complete(controller);
+                }
+              },
+            ),
           ),
         ),
         SizedBox(

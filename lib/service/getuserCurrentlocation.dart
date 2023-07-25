@@ -23,7 +23,6 @@ Future<Position> getUserCurrentLocation() async {
   if (_mapController.userMapPermission.value) {
     Geolocator.getCurrentPosition().then((value) {
       position = value;
-      _mapController.positionStreamController.add(value);
     });
     _mapController.userMapPermission.value = true;
   }

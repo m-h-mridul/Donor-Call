@@ -46,7 +46,7 @@ dependencies:
   #for toast
   fluttertoast: ^8.0.9
   #for map
-  google_maps_flutter: ^2.2.5
+  google_maps_flutter: ^2.4.0
 
   app_settings: ^4.2.0
  

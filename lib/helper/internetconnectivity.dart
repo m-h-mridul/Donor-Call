@@ -6,9 +6,6 @@ import 'package:get/get_rx/src/rx_types/rx_types.dart';
 
 class Internetcheaker {
   static RxBool ans = false.obs;
-  Internetcheaker() {
-    intenetConnectivity();
-  }
   Future intenetConnectivity() async {
     try {
       final result = await InternetAddress.lookup('example.com');

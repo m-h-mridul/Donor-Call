@@ -21,7 +21,7 @@ Future<void> main() async {
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.getInitialMessage();
   FirebaseMessaging.onBackgroundMessage(_firebasemessageBackground);
-  locationPermissionCheak();
+  await locationPermissionCheak();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(const MyApp());

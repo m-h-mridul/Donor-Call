@@ -11,6 +11,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
 
+import '../service/getuserCurrentlocation.dart';
 import '../service/stroage.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    MapController _mapController = MapController();
+    MapController mapController = MapController();
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle(
         systemNavigationBarColor: Color(0xFFFF2156), // navigation bar color
@@ -33,15 +34,21 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(Duration(seconds: 2), () async {
       memory.ans = await memory.userloginorNot();
     });
+    Future.delayed(Duration(seconds: 2), () async {
+      if ( mapController.userMapPermission.value){
+          // await Geolocator.openAppSettings();
+          await locationPermissionCheak();
+      }
+  
+    });
 
     MediaQuerypage.init(context);
     Timer(
         Duration(seconds: 3),
-        () async => _mapController.userMapPermission.value
-            ? await Geolocator.openAppSettings()
-            : memory.ans!
+        () async => memory.ans!
                 ? Get.offAllNamed(Home.name)
-                : Get.offAllNamed(Pagevier.name));
+                : Get.offAllNamed(Pagevier.name)
+            );
     return Scaffold(
       backgroundColor: Color(0xFFFF2156),
       body: SizedBox(

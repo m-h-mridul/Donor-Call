@@ -1,21 +1,65 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, duplicate_ignore, file_names, must_be_immutable, camel_case_types, unused_field
 
+import 'dart:async';
+
 import 'package:donercall/helper/Textstyle.dart';
 import 'package:donercall/helper/media_query.dart';
 
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../controller/mapcontroller.dart';
-import '../../helper/internetconnectivity.dart';
 
-class AmbulanceView extends StatelessWidget {
-  AmbulanceView({Key? key}) : super(key: key);
+class AmbulanceView extends StatefulWidget {
+  const AmbulanceView({Key? key}) : super(key: key);
 
+  @override
+  State<AmbulanceView> createState() => _AmbulanceViewState();
+}
+
+class _AmbulanceViewState extends State<AmbulanceView> {
   MapController mapController = MapController();
 
   @override
+  void initState() {
+    super.initState();
+    Stream<Position> temp = Geolocator.getPositionStream();
+    temp.listen(
+      (event) {
+        CameraPosition cameraPosition = CameraPosition(
+          target: LatLng(event.latitude, event.longitude),
+          zoom: 14,
+        );
+        Marker ownmarker = Marker(
+          markerId: const MarkerId("1"),
+          position: LatLng(event.latitude, event.longitude),
+          infoWindow: const InfoWindow(
+            title: 'My Current Location',
+          ),
+        );
+        mapController.kGoogle = cameraPosition;
+        mapController.markersOwn.value = ownmarker;
+        mapController.markersDoner.add(ownmarker);
+        mapController.markersAmbulance.add(ownmarker);
+        Future.delayed(const Duration(seconds: 2), () async {
+          mapController.gmcambulanceContoller =
+              await mapController.ambulancecontroller.future;
+          mapController.gmcambulanceContoller!
+              .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+        });
+      },
+    );
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    mapController.ambulancecontroller = Completer();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    Internetcheaker();
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuerypage.safeBlockHorizontal! * 1,
@@ -31,20 +75,22 @@ class AmbulanceView extends StatelessWidget {
                 style: TextStyleManger.blackbold20),
           ),
           Expanded(
-            child: GoogleMap(
-              initialCameraPosition: mapController.kGoogle,
-              markers: Set<Marker>.of(mapController.markersAmbulance),
-              mapType: MapType.normal,
-              myLocationEnabled: true,
-              compassEnabled: false,
-              mapToolbarEnabled: false,
-              zoomControlsEnabled: false,
-              myLocationButtonEnabled: false,
-              onMapCreated: (GoogleMapController controller) {
-                if (!mapController.ambulancecontroller.isCompleted) {
-                  mapController.ambulancecontroller.complete(controller);
-                }
-              },
+            child: Obx(
+              () => GoogleMap(
+                initialCameraPosition: mapController.kGoogle,
+                markers: Set<Marker>.of(mapController.markersAmbulance),
+                mapType: MapType.normal,
+                myLocationEnabled: true,
+                compassEnabled: false,
+                mapToolbarEnabled: false,
+                zoomControlsEnabled: false,
+                myLocationButtonEnabled: false,
+                onMapCreated: (GoogleMapController controller) {
+                  if (!mapController.ambulancecontroller.isCompleted) {
+                    mapController.ambulancecontroller.complete(controller);
+                  }
+                },
+              ),
             ),
           ),
           ambulance(),
