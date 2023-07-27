@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/screen/notification/notfificationUI.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -46,7 +47,7 @@ class _DonerView extends State<DonerView> {
           zoom: 14,
         );
 
-        mapController.kGoogle = cameraPosition;
+        mapController.kGoogle.value = cameraPosition;
         mapController.markersOwn.value = ownmarker;
         mapController.markersDoner.add(ownmarker);
         mapController.markersAmbulance.add(ownmarker);
@@ -77,7 +78,7 @@ class _DonerView extends State<DonerView> {
             title: 'My Current Location',
           ),
         );
-        mapController.kGoogle = cameraPosition;
+        mapController.kGoogle.value = cameraPosition;
         mapController.markersOwn.value = ownmarker;
         mapController.markersDoner.add(ownmarker);
         mapController.markersAmbulance.add(ownmarker);
@@ -104,6 +105,14 @@ class _DonerView extends State<DonerView> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        systemNavigationBarColor: Colors.white,
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
     return Column(
       children: [
         Padding(
@@ -141,7 +150,7 @@ class _DonerView extends State<DonerView> {
           child: Obx(
             () => GoogleMap(
               markers: Set<Marker>.of(mapController.markersDoner),
-              initialCameraPosition: mapController.kGoogle,
+              initialCameraPosition: mapController.kGoogle.value,
               mapType: MapType.normal,
               myLocationEnabled: true,
               compassEnabled: false,

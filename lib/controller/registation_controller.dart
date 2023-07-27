@@ -32,7 +32,6 @@ class Registationcontroller extends GetxController {
 
   RxInt secondsRemaining = 60.obs; // Total seconds for the countdown timer
   late Timer _timer;
-  
 
   register_User() async {
     startTimer();
@@ -118,6 +117,7 @@ class Registationcontroller extends GetxController {
         }
       }
     } catch (e) {
+      secondsRemaining.value = 0;
       _timer.cancel();
       progress!.dismiss();
       Get.back();

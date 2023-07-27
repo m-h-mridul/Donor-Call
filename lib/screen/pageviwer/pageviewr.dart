@@ -7,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
 
 import '../registation/Registation.dart';
+import '../registation/userinformationget.dart';
 
 class Pagevier extends StatelessWidget {
   Pagevier({Key? key}) : super(key: key);
@@ -38,6 +39,7 @@ class Pagevier extends StatelessWidget {
       floatingActionButton: ElevatedButton(
         onPressed: () {
           Get.toNamed(Registation.name);
+          
         },
         style: ElevatedButton.styleFrom(
             backgroundColor: AppColor.red_appcolor,

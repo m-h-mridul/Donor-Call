@@ -7,11 +7,8 @@ import 'package:donercall/screen/home.dart';
 import 'package:donercall/screen/pageviwer/pageviewr.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
-
-import '../service/getuserCurrentlocation.dart';
 import '../service/stroage.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -37,7 +34,7 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(Duration(seconds: 2), () async {
       if ( mapController.userMapPermission.value){
           // await Geolocator.openAppSettings();
-          await locationPermissionCheak();
+          // await locationPermissionCheak();
       }
   
     });

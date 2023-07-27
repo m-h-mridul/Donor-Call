@@ -16,10 +16,10 @@ class MapController {
     return instance;
   }
 
-  CameraPosition kGoogle = const CameraPosition(
+  Rx<CameraPosition> kGoogle = const CameraPosition(
     target: LatLng(23.8103, 90.4125),
     zoom: 14.4746,
-  );
+  ).obs;
 
 
   Completer<GoogleMapController> donercontroller = Completer();

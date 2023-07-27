@@ -1,4 +1,3 @@
-
 import 'dart:async';
 import 'package:donercall/controller/mapcontroller.dart';
 import 'package:donercall/helper/Textstyle.dart';
@@ -30,6 +29,7 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
   //**
   Registationcontroller registationController =
       Get.find<Registationcontroller>();
+  
 
 // **
 
@@ -39,32 +39,71 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
   @override
   void initState() {
     if (mapController.markersRegistation.isEmpty) {
-     
-     getUserCurrentLocation().then((value) async {
-        mapController.markersRegistation.add(Marker(
-          markerId: const MarkerId("1"),
-          position: LatLng(value.latitude, value.longitude),
-          infoWindow: const InfoWindow(
-            title: 'My Current Location',
-          ),
-        ));
-
+      Future.delayed(const Duration(seconds: 3), () async {
+        var value = await getUserCurrentLocation();
         CameraPosition cameraPosition = CameraPosition(
           target: LatLng(value.latitude, value.longitude),
           zoom: 14,
         );
         registationController.location = [value.latitude, value.longitude];
 
-        mapController.kGoogle = cameraPosition;
+        mapController.kGoogle.value = cameraPosition;
+
+        Marker ownmarker = Marker(
+          markerId: const MarkerId("1"),
+          position: LatLng(value.latitude, value.longitude),
+          infoWindow: const InfoWindow(
+            title: 'My Current Location',
+          ),
+        );
+        mapController.kGoogle.value = cameraPosition;
+        mapController.markersOwn.value = ownmarker;
+        mapController.markersDoner.add(ownmarker);
+        mapController.markersAmbulance.add(ownmarker);
 
         mapController.gmcregistationContoller =
             await mapController.registationcecontroller.future;
         mapController.gmcregistationContoller!
             .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
       });
-    }
 
-    super.initState();
+      //   getUserCurrentLocation().then((value) async {
+      //     mapController.markersRegistation.add(Marker(
+      //       markerId: const MarkerId("1"),
+      //       position: LatLng(value.latitude, value.longitude),
+      //       infoWindow: const InfoWindow(
+      //         title: 'My Current Location',
+      //       ),
+      //     ));
+
+      //     CameraPosition cameraPosition = CameraPosition(
+      //       target: LatLng(value.latitude, value.longitude),
+      //       zoom: 14,
+      //     );
+      //     registationController.location = [value.latitude, value.longitude];
+
+      //     mapController.kGoogle.value = cameraPosition;
+
+      //     Marker ownmarker = Marker(
+      //       markerId: const MarkerId("1"),
+      //       position: LatLng(value.latitude, value.longitude),
+      //       infoWindow: const InfoWindow(
+      //         title: 'My Current Location',
+      //       ),
+      //     );
+      //     mapController.kGoogle.value = cameraPosition;
+      //     mapController.markersOwn.value = ownmarker;
+      //     mapController.markersDoner.add(ownmarker);
+      //     mapController.markersAmbulance.add(ownmarker);
+
+      //     mapController.gmcregistationContoller =
+      //         await mapController.registationcecontroller.future;
+      //     mapController.gmcregistationContoller!
+      //         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+      //   });
+
+      super.initState();
+    }
   }
 
   @override
@@ -77,7 +116,6 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-
         body: ProgressHUD(
           child: Builder(builder: (context) {
             return SingleChildScrollView(
@@ -88,7 +126,6 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                       horizontal: MediaQuerypage.safeBlockHorizontal! * 4,
                       vertical: MediaQuerypage.safeBlockVertical! * 1),
                   child: Column(
-                    // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Padding(
                         padding: EdgeInsets.symmetric(
@@ -106,7 +143,8 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                           ),
                           child: Obx(
                             () => GoogleMap(
-                              initialCameraPosition: mapController.kGoogle,
+                              initialCameraPosition:
+                                  mapController.kGoogle.value,
                               mapType: MapType.normal,
                               myLocationEnabled: true,
                               compassEnabled: false,
@@ -167,8 +205,8 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
                             height: MediaQuerypage.screenHeight! * 0.055,
                             decoration: BoxDecoration(
                                 color: AppColor.red_appcolor,
-                                borderRadius:
-                                    const BorderRadius.all(Radius.circular(20))),
+                                borderRadius: const BorderRadius.all(
+                                    Radius.circular(20))),
                             child: Text('Save',
                                 style: TextStyleManger.whitebold18),
                           ),

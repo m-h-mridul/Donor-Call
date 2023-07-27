@@ -1,11 +1,11 @@
-// ignore_for_file: file_names
+// ignore_for_file: file_names, unrelated_type_equality_checks
 
 import 'dart:async';
 
 import 'package:donercall/controller/mapcontroller.dart';
-import 'package:geolocator/geolocator.dart' show Geolocator, LocationPermission, Position;
+import 'package:geolocator/geolocator.dart'
+    show Geolocator, LocationPermission, Position;
 import 'package:permission_handler/permission_handler.dart';
-
 
 MapController _mapController = MapController();
 
@@ -21,9 +21,7 @@ Position position = Position(
 
 Future<Position> getUserCurrentLocation() async {
   if (_mapController.userMapPermission.value) {
-    Geolocator.getCurrentPosition().then((value) {
-      position = value;
-    });
+    position = await Geolocator.getCurrentPosition();
     _mapController.userMapPermission.value = true;
   }
   return position;

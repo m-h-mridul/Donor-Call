@@ -6,6 +6,7 @@ import 'package:donercall/helper/Textstyle.dart';
 import 'package:donercall/helper/media_query.dart';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -38,7 +39,7 @@ class _AmbulanceViewState extends State<AmbulanceView> {
             title: 'My Current Location',
           ),
         );
-        mapController.kGoogle = cameraPosition;
+        mapController.kGoogle.value = cameraPosition;
         mapController.markersOwn.value = ownmarker;
         mapController.markersDoner.add(ownmarker);
         mapController.markersAmbulance.add(ownmarker);
@@ -60,6 +61,14 @@ class _AmbulanceViewState extends State<AmbulanceView> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        systemNavigationBarColor: Colors.white,
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
     return Padding(
       padding: EdgeInsets.symmetric(
           horizontal: MediaQuerypage.safeBlockHorizontal! * 1,
@@ -77,7 +86,7 @@ class _AmbulanceViewState extends State<AmbulanceView> {
           Expanded(
             child: Obx(
               () => GoogleMap(
-                initialCameraPosition: mapController.kGoogle,
+                initialCameraPosition: mapController.kGoogle.value,
                 markers: Set<Marker>.of(mapController.markersAmbulance),
                 mapType: MapType.normal,
                 myLocationEnabled: true,

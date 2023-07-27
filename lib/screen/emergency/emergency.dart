@@ -1,5 +1,6 @@
 import 'package:donercall/controller/helplineController.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import '../../controller/bloodbankControllerr.dart';
 import '../../helper/Textstyle.dart';
@@ -19,6 +20,14 @@ class Emeregency extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(
+      SystemUiOverlayStyle.dark.copyWith(
+        systemNavigationBarColor: Colors.white,
+        statusBarColor: Colors.white,
+        statusBarIconBrightness: Brightness.dark,
+        systemNavigationBarIconBrightness: Brightness.dark,
+      ),
+    );
     return SafeArea(
       child: DefaultTabController(
         length: 2,
