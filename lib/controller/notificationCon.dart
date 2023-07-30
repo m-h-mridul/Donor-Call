@@ -7,13 +7,25 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get_rx/get_rx.dart';
 
+import '../model/notificationmoel.dart';
+
+RxList<NotificationModel> _notificationlist = RxList<NotificationModel>();
+
 class NotificationController {
   final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
   RxString usertoken = "".obs;
 
+  RxList<NotificationModel> get notfiactionlist => _notificationlist;
+
   static instance() {
     return NotificationController();
+  }
+
+  callRequiremethodforNoti() async {
+    requestPermission();
+    getToken(UserInformation.userId);
+    await initInfo();
   }
 
   void requestPermission() async {
@@ -52,7 +64,11 @@ class NotificationController {
     });
   }
 
-  initInfo() {
+  void firabaseInit() {
+    initInfo();
+  }
+
+  initInfo() async {
     var androidInitialize =
         const AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -60,14 +76,15 @@ class NotificationController {
     var initializationsSettings =
         InitializationSettings(android: androidInitialize, iOS: iOSInitialize);
 
-    flutterLocalNotificationsPlugin.initialize(
-      initializationsSettings
-      // onDidReceiveNotificationResponse: ((details) => null),
+    await flutterLocalNotificationsPlugin.initialize(
+      initializationsSettings,
+      // onDidReceiveNotificationResponse: ((details) {
+      //   // for redirect to the app any page
+      // }),
       // onDidReceiveBackgroundNotificationResponse: ((details) async => null),
     );
 
     FirebaseMessaging.onMessage.listen((RemoteMessage message) async {
-
       BigTextStyleInformation bigTextStyleInformation = BigTextStyleInformation(
         message.notification!.body.toString(),
         htmlFormatBigText: true,
@@ -85,6 +102,11 @@ class NotificationController {
           android: androidPlatformChannelSpecifics,
           iOS: const DarwinNotificationDetails());
 
+      NotificationModel temp = NotificationModel(
+          title: message.notification!.title.toString(),
+          body: message.notification!.body.toString(),
+          payload: message.data.toString());
+      _notificationlist.add(temp);
       await flutterLocalNotificationsPlugin.show(
           0,
           message.notification?.title.toString(),
@@ -92,11 +114,5 @@ class NotificationController {
           platformChannelSpecifics,
           payload: message.data['title']);
     });
-  }
-
-  callRequiremethodforNoti() {
-    requestPermission();
-    getToken(UserInformation.userId);
-    initInfo();
   }
 }

@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, file_names
+// ignore_for_file: non_constant_identifier_names, file_names, prefer_const_constructors
 
 import 'package:donercall/controller/notificationCon.dart';
 import 'package:donercall/controller/profileController.dart';

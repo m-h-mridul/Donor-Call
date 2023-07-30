@@ -5,9 +5,7 @@ import 'package:donercall/helper/media_query.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
-
 import '../registation/Registation.dart';
-import '../registation/userinformationget.dart';
 
 class Pagevier extends StatelessWidget {
   Pagevier({Key? key}) : super(key: key);

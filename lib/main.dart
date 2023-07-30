@@ -8,9 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
 import 'package:donercall/helper/splash_screen.dart';
+import 'controller/notificationCon.dart';
 import 'helper/routes/approute.dart';
 
+@pragma('vm:entry-point')
 Future<void> _firebasemessageBackground(RemoteMessage remoteMessage) async {
+  await Firebase.initializeApp();
   if (kDebugMode) {
     print("Handleing thebackground ground message");
   }

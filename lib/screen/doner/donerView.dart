@@ -136,7 +136,7 @@ class _DonerView extends State<DonerView> {
                   style: TextStyleManger.black18headline),
               IconButton(
                 onPressed: () {
-                  Get.to(() => const NotificationUi());
+                  Get.to(() =>  NotificationUi());
                 },
                 icon: Icon(
                   Icons.notifications_outlined,

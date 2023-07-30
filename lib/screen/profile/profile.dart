@@ -1,5 +1,6 @@
-
 // ignore_for_file: must_be_immutable
+
+import 'dart:async';
 
 import 'package:donercall/helper/appcolor.dart';
 import 'package:donercall/helper/media_query.dart';
@@ -13,17 +14,33 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import '../../helper/Textstyle.dart';
 import '../../model/userinformation.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   Profile({Key? key}) : super(key: key);
 
+  @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   ProfileController profilecontroller = ProfileController();
+
   RxBool isSwitched = false.obs;
 
   @override
-  Widget build(BuildContext context) {
+  void initState() {
     //**call method for get information in api  */
     profilecontroller.getUserInformatio();
+    super.initState();
+  }
 
+  @override
+  void dispose() {
+    super.dispose();
+    profilecontroller.ProfileCecontroller = Completer();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return WillPopScope(
       onWillPop: () async {
         SystemChrome.setSystemUIOverlayStyle(
@@ -127,7 +144,7 @@ class Profile extends StatelessWidget {
                       ],
                     ),
                   ),
-                 const Divider(),
+                  const Divider(),
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: MediaQuerypage.safeBlockHorizontal! * 2),
@@ -196,7 +213,6 @@ class Profile extends StatelessWidget {
                         SizedBox.square(
                           dimension: MediaQuerypage.smallSizeHeight! * 1,
                         ),
-                        
                         SizedBox.square(
                           dimension: MediaQuerypage.smallSizeHeight! * 1,
                         ),
@@ -205,7 +221,7 @@ class Profile extends StatelessWidget {
                             Icons.edit_outlined,
                             color: AppColor.red_appcolor,
                           ),
-                          title:const Text('Profile Edit'),
+                          title: const Text('Profile Edit'),
                           onTap: () {
                             // Get.to(() => ProfileEdit());
                           },

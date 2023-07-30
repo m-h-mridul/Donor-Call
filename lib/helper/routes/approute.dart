@@ -40,7 +40,7 @@ class Approutes {
     
     GetPage(
       name: NotificationUi.name,
-      page: () => const NotificationUi(),
+      page: () => NotificationUi(),
     ),
   ];
 }

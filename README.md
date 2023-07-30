@@ -1,4 +1,4 @@
-# DonerCall <p align=right><a href="https://drive.google.com/drive/folders/10p-6MMZF-i5Ft9MzK68UrU6Dnn5sndKc?usp=drive_link" target="_blank">APK DOWNLOAD</a></p>
+# DonerCall <p align=right><a href="https://drive.google.com/file/d/1NhzeS7e2UEb3gZN4-WJR7eLL6b1fliN-/view?usp=sharing" target="_blank">APK DOWNLOAD</a></p>
 
 <p align=center>
     <img src="assets/louncher_icon/icon.png" width="40%" height="40%">

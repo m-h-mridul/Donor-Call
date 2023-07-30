@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/route_manager.dart';
 import 'package:lottie/lottie.dart';
+import '../service/getuserCurrentlocation.dart';
 import '../service/stroage.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -32,20 +33,18 @@ class SplashScreen extends StatelessWidget {
       memory.ans = await memory.userloginorNot();
     });
     Future.delayed(Duration(seconds: 2), () async {
-      if ( mapController.userMapPermission.value){
-          // await Geolocator.openAppSettings();
-          // await locationPermissionCheak();
+      if (mapController.userMapPermission.value) {
+        // await Geolocator.openAppSettings();
+        await locationPermissionCheak();
       }
-  
     });
 
     MediaQuerypage.init(context);
     Timer(
         Duration(seconds: 3),
         () async => memory.ans!
-                ? Get.offAllNamed(Home.name)
-                : Get.offAllNamed(Pagevier.name)
-            );
+            ? Get.offAllNamed(Home.name)
+            : Get.offAllNamed(Pagevier.name));
     return Scaffold(
       backgroundColor: Color(0xFFFF2156),
       body: SizedBox(
