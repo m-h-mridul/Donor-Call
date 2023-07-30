@@ -67,41 +67,6 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
             .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
       });
 
-      //   getUserCurrentLocation().then((value) async {
-      //     mapController.markersRegistation.add(Marker(
-      //       markerId: const MarkerId("1"),
-      //       position: LatLng(value.latitude, value.longitude),
-      //       infoWindow: const InfoWindow(
-      //         title: 'My Current Location',
-      //       ),
-      //     ));
-
-      //     CameraPosition cameraPosition = CameraPosition(
-      //       target: LatLng(value.latitude, value.longitude),
-      //       zoom: 14,
-      //     );
-      //     registationController.location = [value.latitude, value.longitude];
-
-      //     mapController.kGoogle.value = cameraPosition;
-
-      //     Marker ownmarker = Marker(
-      //       markerId: const MarkerId("1"),
-      //       position: LatLng(value.latitude, value.longitude),
-      //       infoWindow: const InfoWindow(
-      //         title: 'My Current Location',
-      //       ),
-      //     );
-      //     mapController.kGoogle.value = cameraPosition;
-      //     mapController.markersOwn.value = ownmarker;
-      //     mapController.markersDoner.add(ownmarker);
-      //     mapController.markersAmbulance.add(ownmarker);
-
-      //     mapController.gmcregistationContoller =
-      //         await mapController.registationcecontroller.future;
-      //     mapController.gmcregistationContoller!
-      //         .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-      //   });
-
       super.initState();
     }
   }
@@ -250,44 +215,6 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
     );
   }
 
-// Obx userPasswordFiled() {
-//   return Obx(
-//     () => TextFormField(
-//       controller: password,
-//       obscureText: view.value,
-//       textInputAction: TextInputAction.done,
-//       validator: (_) {
-//         Validation.passwordvalidation(password.text.toString());
-//         return null;
-//       },
-//       decoration: InputDecoration(
-//           border: OutlineInputBorder(
-//             borderSide: BorderSide.none,
-//             borderRadius: BorderRadius.circular(MediaQuerypage.pixel! * 6),
-//           ),
-//           filled: true,
-//           fillColor: AppColor.grey_textFiled,
-//           prefixIcon: Icon(
-//             Icons.lock,
-//             color: AppColor.red_appcolor,
-//           ),
-//           suffixIcon: IconButton(
-//             onPressed: () {
-//               view.value = !view.value;
-//             },
-//             icon: !view.value
-//                 ? Icon(
-//                     Icons.remove_red_eye,
-//                   )
-//                 : Icon(
-//                     Icons.visibility_off,
-//                   ),
-//           ),
-//           hintText: 'Password'),
-//     ),
-//   );
-// }
-
   Padding donationtimePicker() {
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -296,8 +223,8 @@ class _UserInfromationGetState extends State<UserInfromationGet> {
       child: DateTimePicker(
         controller: registationController.donate_time,
         type: DateTimePickerType.date,
-        dateMask: 'd MMM, yyyy',
-        firstDate: DateTime(2000),
+        dateMask: 'dd MM, yyyy',
+        firstDate: DateTime(2020),
         lastDate: DateTime(2100),
         icon: const Icon(Icons.event),
         dateLabelText: 'Date',
