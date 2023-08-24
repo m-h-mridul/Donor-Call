@@ -16,8 +16,6 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //**status bar theam
-    // */
     SystemChrome.setSystemUIOverlayStyle(
       SystemUiOverlayStyle.dark.copyWith(
         systemNavigationBarColor: Colors.white,

@@ -33,37 +33,6 @@ class _DonerView extends State<DonerView> {
   void initState() {
     super.initState();
     mapController.loadCustomIcon();
-    if (mapController.markersDoner.isEmpty) {
-      getUserCurrentLocation().then((value) async {
-        Marker ownmarker = Marker(
-          markerId: const MarkerId("1"),
-          position: LatLng(value.latitude, value.longitude),
-          infoWindow: const InfoWindow(
-            title: 'My Current Location',
-          ),
-        );
-        CameraPosition cameraPosition = CameraPosition(
-          target: LatLng(value.latitude, value.longitude),
-          zoom: 14,
-        );
-
-        mapController.kGoogle.value = cameraPosition;
-        mapController.markersOwn.value = ownmarker;
-        mapController.markersDoner.add(ownmarker);
-        mapController.markersAmbulance.add(ownmarker);
-        // for donnerController
-        mapController.gmcDonerController =
-            await mapController.donercontroller.future;
-        mapController.gmcDonerController!
-            .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-        //  for ambulance
-        mapController.gmcambulanceContoller =
-            await mapController.ambulancecontroller.future;
-        mapController.gmcambulanceContoller!
-            .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-      });
-    }
-
     Stream<Position> temp = Geolocator.getPositionStream();
     temp.listen(
       (event) {
@@ -92,11 +61,11 @@ class _DonerView extends State<DonerView> {
               await mapController.ambulancecontroller.future;
           mapController.gmcambulanceContoller!
               .animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-        
         });
       },
     );
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -136,7 +105,7 @@ class _DonerView extends State<DonerView> {
                   style: TextStyleManger.black18headline),
               IconButton(
                 onPressed: () {
-                  Get.to(() =>  NotificationUi());
+                  Get.to(() => NotificationUi());
                 },
                 icon: Icon(
                   Icons.notifications_outlined,

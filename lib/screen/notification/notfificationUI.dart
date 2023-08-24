@@ -4,7 +4,6 @@ import 'package:donercall/controller/notificationCon.dart';
 import 'package:donercall/model/notificationmoel.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 
 class NotificationUi extends StatelessWidget {
   static const name = '/notificatioin';
@@ -15,6 +14,7 @@ class NotificationUi extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: const Icon(

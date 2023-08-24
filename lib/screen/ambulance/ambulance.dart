@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:donercall/helper/Textstyle.dart';
 import 'package:donercall/helper/media_query.dart';
+import 'package:donercall/helper/toast.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -115,12 +116,14 @@ class _AmbulanceViewState extends State<AmbulanceView> {
         child: Row(
           children: [
             InkWell(
-              onTap: () {},
+              onTap: () {
+                showToast(showMessage: 'Service is not available');
+              },
               child: Card(
                 elevation: 3,
                 child: SizedBox(
                   height: MediaQuerypage.screenHeight! * 0.13,
-                  width: MediaQuerypage.screenWidth! * 0.25,
+                  width: MediaQuerypage.screenWidth! * 0.3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -128,7 +131,7 @@ class _AmbulanceViewState extends State<AmbulanceView> {
                       Image(
                           //fit: BoxFit.none,
                           width: MediaQuerypage.screenWidth! * 0.3,
-                          height: MediaQuerypage.screenHeight! * .06,
+                          height: MediaQuerypage.screenHeight! * .08,
                           image: const AssetImage(
                               'assets/best-icu-ambulance-service-dhaka.png')),
                       Text(
@@ -142,12 +145,14 @@ class _AmbulanceViewState extends State<AmbulanceView> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                showToast(showMessage: 'Service is not available');
+              },
               child: Card(
                 elevation: 3,
                 child: SizedBox(
                   height: MediaQuerypage.screenHeight! * 0.13,
-                  width: MediaQuerypage.screenWidth! * 0.25,
+                  width: MediaQuerypage.screenWidth! * 0.3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -155,7 +160,7 @@ class _AmbulanceViewState extends State<AmbulanceView> {
                       Image(
                           //fit: BoxFit.none,
                           width: MediaQuerypage.screenWidth! * 0.3,
-                          height: MediaQuerypage.screenHeight! * .06,
+                          height: MediaQuerypage.screenHeight! * .08,
                           image:
                               const AssetImage('assets/hiace-ambulance.png')),
                       Text(
@@ -169,12 +174,14 @@ class _AmbulanceViewState extends State<AmbulanceView> {
               ),
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                showToast(showMessage: 'Service is not available');
+              },
               child: Card(
                 elevation: 3,
                 child: SizedBox(
                   height: MediaQuerypage.screenHeight! * 0.13,
-                  width: MediaQuerypage.screenWidth! * 0.25,
+                  width: MediaQuerypage.screenWidth! * 0.3,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     crossAxisAlignment: CrossAxisAlignment.center,
@@ -182,7 +189,7 @@ class _AmbulanceViewState extends State<AmbulanceView> {
                       Image(
                           //fit: BoxFit.none,
                           width: MediaQuerypage.screenWidth! * 0.3,
-                          height: MediaQuerypage.screenHeight! * .06,
+                          height: MediaQuerypage.screenHeight! * .08,
                           image: const AssetImage(
                               'assets/freezer-van-ambulanceservice-dhaka.png')),
                       Center(
@@ -191,35 +198,6 @@ class _AmbulanceViewState extends State<AmbulanceView> {
                           style: TextStyleManger.black16,
                           textAlign: TextAlign.center,
                         ),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            InkWell(
-              onTap: () {
-                // Get.toNamed(AmbulanceUI.name);
-              },
-              child: Card(
-                elevation: 3,
-                child: SizedBox(
-                  height: MediaQuerypage.screenHeight! * 0.13,
-                  width: MediaQuerypage.screenWidth! * 0.25,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image(
-                        //fit: BoxFit.none,
-                        width: MediaQuerypage.screenWidth! * 0.3,
-                        height: MediaQuerypage.screenHeight! * .06,
-                        image: AssetImage('assets/ambulance.png'),
-                      ),
-                      Text(
-                        'Book Ambulance',
-                        style: TextStyleManger.black16,
-                        textAlign: TextAlign.center,
                       )
                     ],
                   ),
